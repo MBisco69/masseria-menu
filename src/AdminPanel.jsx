@@ -1,40 +1,54 @@
 export default function AdminPanel({ allChoices }) {
-  const calculateTotals = () => {
-    const totals = {};
-    allChoices.forEach(({ choices, other }) => {
-      Object.entries(choices).forEach(([dish, qty]) => {
-        totals[dish] = (totals[dish] || 0) + qty;
-      });
-      if (other) {
-        totals[other] = (totals[other] || 0) + 1;
-      }
-    });
-    return totals;
-  };
+  const totals = {};
 
-  const totals = calculateTotals();
+  allChoices.forEach((entry) => {
+    Object.entries(entry.choices).forEach(([dish, qty]) => {
+      totals[dish] = (totals[dish] || 0) + qty;
+    });
+  });
 
   return (
-    <div style={{ padding: "20px", fontFamily: "'Lora', serif" }}>
-      <h2 style={{ color: "#4a5f44" }}>Pannello Amministratore</h2>
+    <div style={{ padding: "30px", maxWidth: "700px", margin: "0 auto", fontFamily: "sans-serif" }}>
+      <h2 style={{ color: "#2c3e50", marginBottom: "20px", fontSize: "28px" }}>
+        🛠️ Pannello Amministratore
+      </h2>
 
-      <h3>Scelte per camera:</h3>
-      <ul>
-        {allChoices.map((entry, index) => (
-          <li key={index}>
-            <strong>Camera {entry.room}:</strong>{" "}
-            {Object.entries(entry.choices).map(([dish, qty]) => `${dish}: ${qty}`).join(", ")}
-            {entry.other && ` | Altro: ${entry.other}`}
-          </li>
-        ))}
-      </ul>
+      <div style={{ marginBottom: "40px" }}>
+        <h3 style={{ color: "#34495e", borderBottom: "1px solid #ccc", paddingBottom: "6px" }}>
+          📋 Scelte per camera:
+        </h3>
+        {allChoices.length === 0 ? (
+          <p style={{ color: "#888" }}>Nessuna scelta ricevuta.</p>
+        ) : (
+          <ul style={{ paddingLeft: "20px", color: "#2c3e50" }}>
+            {allChoices.map((entry, index) => (
+              <li key={index} style={{ marginBottom: "8px" }}>
+                <strong>Camera {entry.room}:</strong>{" "}
+                {Object.entries(entry.choices)
+                  .map(([dish, qty]) => `${dish}: ${qty}`)
+                  .join(", ")}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-      <h3 style={{ marginTop: "20px" }}>Totale piatti per tipo:</h3>
-      <ul>
-        {Object.entries(totals).map(([dish, qty], idx) => (
-          <li key={idx}>{dish}: {qty}</li>
-        ))}
-      </ul>
+      <div>
+        <h3 style={{ color: "#34495e", borderBottom: "1px solid #ccc", paddingBottom: "6px" }}>
+          🍽️ Totale piatti per tipo:
+        </h3>
+        {Object.keys(totals).length === 0 ? (
+          <p style={{ color: "#888" }}>Nessuna scelta ancora da sommare.</p>
+        ) : (
+          <ul style={{ paddingLeft: "20px", color: "#2c3e50" }}>
+            {Object.entries(totals).map(([dish, qty], idx) => (
+              <li key={idx}>
+                {dish}: {qty}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
