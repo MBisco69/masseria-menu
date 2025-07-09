@@ -1,0 +1,10 @@
+{
+  "firstCourses": [
+    { "it": "Pennette all'arrabbiata", "en": "Penne arrabbiata", "de": "Penne all’arrabbiata" },
+    { "it": "Gnocchi al salmone", "en": "Salmon gnocchi", "de": "Lachs-Gnocchi" }
+  ],
+  "secondCourses": [
+    { "it": "Caciocavallo al forno", "en": "Baked caciocavallo", "de": "Gebackener Caciocavallo" },
+    { "it": "Merluzzo al forno", "en": "Baked cod", "de": "Gebackener Kabeljau" }
+  ]
+}
