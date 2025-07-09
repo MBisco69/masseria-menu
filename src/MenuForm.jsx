@@ -1,17 +1,6 @@
 import { useState } from "react";
 import logo from "./assets/logo.png";
 
-const menuData = {
-  firstCourses: [
-    { it: "Pennette all'arrabbiata", en: "Penne arrabbiata", de: "Penne all’arrabbiata" },
-    { it: "Gnocchi al salmone", en: "Salmon gnocchi", de: "Lachs-Gnocchi" },
-  ],
-  secondCourses: [
-    { it: "Caciocavallo al forno", en: "Baked caciocavallo", de: "Gebackener Caciocavallo" },
-    { it: "Merluzzo al forno", en: "Baked cod", de: "Gebackener Kabeljau" },
-  ],
-};
-
 export default function MenuForm({ allChoices, setAllChoices }) {
   const [language, setLanguage] = useState("it");
   const [room, setRoom] = useState("");
@@ -61,16 +50,21 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       }}
     >
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <img src={logo} alt="Logo" style={{ maxWidth: "160px", marginBottom: "20px" }} />
+        <img src={logo} alt="Logo" style={{ maxWidth: "180px", marginBottom: "20px" }} />
         <h2 style={{ color: "#4a5f44", fontSize: "26px" }}>Menù del giorno</h2>
       </div>
 
-      <label style={{ fontWeight: "bold" }}>
+      <label style={{ fontWeight: "bold", color: "#4a5f44" }}>
         Seleziona la lingua:&nbsp;
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          style={{ padding: "6px", borderRadius: "6px" }}
+          style={{
+            padding: "6px",
+            borderRadius: "6px",
+            backgroundColor: "#f1f1f1",
+            color: "#4a5f44",
+          }}
         >
           <option value="it">Italiano</option>
           <option value="en">English</option>
@@ -86,8 +80,14 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           type="text"
           value={room}
           onChange={(e) => setRoom(e.target.value)}
-          style={{ width: "100%", padding: "8px", borderRadius: "6px", marginTop: "4px" }}
-          placeholder="12"
+          placeholder="Inserire il numero della stanza"
+          style={{
+            width: "100%",
+            padding: "8px",
+            borderRadius: "6px",
+            marginTop: "4px",
+            backgroundColor: "#f1f1f1",
+          }}
         />
       </label>
 
@@ -102,7 +102,12 @@ export default function MenuForm({ allChoices, setAllChoices }) {
             min="0"
             value={quantities[getLabel(dish)] || ""}
             onChange={(e) => handleQuantityChange(getLabel(dish), e.target.value)}
-            style={{ width: "60px", marginLeft: "10px", padding: "4px" }}
+            style={{
+              width: "60px",
+              marginLeft: "10px",
+              padding: "4px",
+              backgroundColor: "#f1f1f1",
+            }}
           />
         </div>
       ))}
@@ -116,7 +121,12 @@ export default function MenuForm({ allChoices, setAllChoices }) {
             min="0"
             value={quantities[getLabel(dish)] || ""}
             onChange={(e) => handleQuantityChange(getLabel(dish), e.target.value)}
-            style={{ width: "60px", marginLeft: "10px", padding: "4px" }}
+            style={{
+              width: "60px",
+              marginLeft: "10px",
+              padding: "4px",
+              backgroundColor: "#f1f1f1",
+            }}
           />
         </div>
       ))}
@@ -129,11 +139,19 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           type="text"
           value={otherChoice}
           onChange={(e) => setOtherChoice(e.target.value)}
-          style={{ width: "100%", padding: "8px", borderRadius: "6px", marginTop: "4px" }}
+          placeholder="Riportare anche allergie e intolleranze, se presenti"
+          style={{
+            width: "100%",
+            padding: "8px",
+            borderRadius: "6px",
+            marginTop: "4px",
+            backgroundColor: "#f1f1f1",
+          }}
         />
       </label>
 
       <br /><br />
+
       <button
         type="submit"
         style={{
