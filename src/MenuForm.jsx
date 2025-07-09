@@ -1,6 +1,42 @@
 import { useState } from "react";
 import logo from "./assets/logo.png";
 
+const translations = {
+  it: {
+    title: "Menù del giorno",
+    languageLabel: "Seleziona la lingua",
+    roomLabel: "Numero camera",
+    roomPlaceholder: "Inserire il numero della stanza",
+    firstCourses: "Primi piatti",
+    secondCourses: "Secondi piatti",
+    otherLabel: "Altro (inserire piatti alternativi)",
+    otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
+    submit: "Invia scelta",
+  },
+  en: {
+    title: "Menu of the Day",
+    languageLabel: "Select language",
+    roomLabel: "Room number",
+    roomPlaceholder: "Enter room number",
+    firstCourses: "First Courses",
+    secondCourses: "Second Courses",
+    otherLabel: "Other (insert alternatives)",
+    otherPlaceholder: "Also report allergies or intolerances, if any",
+    submit: "Submit choice",
+  },
+  de: {
+    title: "Tagesmenü",
+    languageLabel: "Sprache auswählen",
+    roomLabel: "Zimmernummer",
+    roomPlaceholder: "Zimmernummer eingeben",
+    firstCourses: "Erste Gänge",
+    secondCourses: "Zweite Gänge",
+    otherLabel: "Andere (bitte Alternativen angeben)",
+    otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
+    submit: "Auswahl senden",
+  }
+};
+
 const menuData = {
   firstCourses: [
     {
@@ -34,6 +70,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
   const [quantities, setQuantities] = useState({});
   const [otherChoice, setOtherChoice] = useState("");
 
+  const t = translations[language];
   const getLabel = (obj) => obj[language];
 
   const handleQuantityChange = (dish, value) => {
@@ -46,7 +83,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!room) {
-      alert("Inserisci il numero della camera.");
+      alert(t.roomPlaceholder);
       return;
     }
 
@@ -55,8 +92,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       choices["Altro"] = otherChoice.trim();
     }
 
-    const newEntry = { room, choices };
-    setAllChoices([...allChoices, newEntry]);
+    setAllChoices([...allChoices, { room, choices }]);
     setRoom("");
     setQuantities({});
     setOtherChoice("");
@@ -82,11 +118,11 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           alt="Logo"
           style={{ maxWidth: "180px", marginBottom: "20px" }}
         />
-        <h2 style={{ color: "#4a5f44", fontSize: "26px" }}>Menù del giorno</h2>
+        <h2 style={{ color: "#4a5f44", fontSize: "26px" }}>{t.title}</h2>
       </div>
 
       <label style={{ fontWeight: "bold", color: "#4a5f44" }}>
-        Seleziona la lingua:&nbsp;
+        {t.languageLabel}:&nbsp;
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
@@ -107,20 +143,13 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <br />
 
       <label>
-        <strong>
-          {getLabel({
-            it: "Numero camera",
-            en: "Room number",
-            de: "Zimmernummer"
-          })}
-          :
-        </strong>
+        <strong>{t.roomLabel}:</strong>
         <br />
         <input
           type="text"
           value={room}
           onChange={(e) => setRoom(e.target.value)}
-          placeholder="Inserire il numero della stanza"
+          placeholder={t.roomPlaceholder}
           style={{
             width: "100%",
             padding: "8px",
@@ -134,13 +163,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <br />
       <br />
 
-      <h3 style={{ color: "#4a5f44" }}>
-        {getLabel({
-          it: "Primi piatti",
-          en: "First Courses",
-          de: "Erste Gänge"
-        })}
-      </h3>
+      <h3 style={{ color: "#4a5f44" }}>{t.firstCourses}</h3>
       {menuData.firstCourses.map((dish, idx) => (
         <div key={idx} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
@@ -161,13 +184,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         </div>
       ))}
 
-      <h3 style={{ color: "#4a5f44", marginTop: "20px" }}>
-        {getLabel({
-          it: "Secondi piatti",
-          en: "Second Courses",
-          de: "Zweite Gänge"
-        })}
-      </h3>
+      <h3 style={{ color: "#4a5f44", marginTop: "20px" }}>{t.secondCourses}</h3>
       {menuData.secondCourses.map((dish, idx) => (
         <div key={idx} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
@@ -191,20 +208,13 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <br />
 
       <label>
-        <strong>
-          {getLabel({
-            it: "Altro (inserire piatti alternativi)",
-            en: "Other (insert alternatives)",
-            de: "Andere (bitte Alternativen angeben)"
-          })}
-          :
-        </strong>
+        <strong>{t.otherLabel}:</strong>
         <br />
         <input
           type="text"
           value={otherChoice}
           onChange={(e) => setOtherChoice(e.target.value)}
-          placeholder="Riportare anche allergie e intolleranze, se presenti"
+          placeholder={t.otherPlaceholder}
           style={{
             width: "100%",
             padding: "8px",
@@ -231,15 +241,12 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           width: "100%"
         }}
       >
-        {getLabel({
-          it: "Invia scelta",
-          en: "Submit choice",
-          de: "Auswahl senden"
-        })}
+        {t.submit}
       </button>
     </form>
   );
 }
+
 
 
 
