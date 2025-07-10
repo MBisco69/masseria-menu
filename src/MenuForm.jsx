@@ -92,15 +92,28 @@ export default function MenuForm({ allChoices, setAllChoices }) {
 
     const choices = { ...quantities };
     if (otherChoice.trim()) {
-      choices["other"] = otherChoice.trim(); // 👈 chiave standard per "altro"
+      choices["other"] = otherChoice.trim();
     }
 
     setAllChoices([...allChoices, { room, choices }]);
+
+    // Messaggio riepilogativo tradotto
+    let summary = `📍 ${t.roomLabel}: ${room}\n`;
+    Object.entries(choices).forEach(([dish, qty]) => {
+      if (dish === "other") {
+        summary += `📝 ${t.otherLabel}: ${qty}\n`;
+      } else if (qty > 0) {
+        summary += `🍽️ ${dish}: ${qty}\n`;
+      }
+    });
+
+    alert(summary);
+
+    // Reset campi
     setRoom("");
     setQuantities({});
     setOtherChoice("");
-    alert(t.submit);
-  };
+  }
 
   return (
     <form
@@ -256,6 +269,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
     </form>
   );
 }
+
 
 
 
