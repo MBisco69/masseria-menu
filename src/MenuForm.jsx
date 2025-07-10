@@ -12,6 +12,8 @@ const translations = {
     otherLabel: "Altro (inserire piatti alternativi)",
     otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
     submit: "Invia scelta",
+    alertRoom: "Inserisci il numero della stanza.",
+    alertSent: "Scelta inviata con successo!",
   },
   en: {
     title: "Menu of the Day",
@@ -23,6 +25,8 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
+    alertRoom: "Please enter your room number.",
+    alertSent: "Choice submitted successfully!",
   },
   de: {
     title: "Tagesmenü",
@@ -34,33 +38,19 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
+    alertRoom: "Bitte geben Sie Ihre Zimmernummer ein.",
+    alertSent: "Auswahl erfolgreich übermittelt!",
   }
 };
 
 const menuData = {
   firstCourses: [
-    {
-      it: "Pennette all'arrabbiata",
-      en: "Penne arrabbiata",
-      de: "Penne all’arrabbiata"
-    },
-    {
-      it: "Gnocchi al salmone",
-      en: "Salmon gnocchi",
-      de: "Lachs-Gnocchi"
-    }
+    { key: "pennette", it: "Pennette all'arrabbiata", en: "Penne arrabbiata", de: "Penne all’arrabbiata" },
+    { key: "gnocchi", it: "Gnocchi al salmone", en: "Salmon gnocchi", de: "Lachs-Gnocchi" }
   ],
   secondCourses: [
-    {
-      it: "Caciocavallo al forno",
-      en: "Baked caciocavallo",
-      de: "Gebackener Caciocavallo"
-    },
-    {
-      it: "Merluzzo al forno",
-      en: "Baked cod",
-      de: "Gebackener Kabeljau"
-    }
+    { key: "caciocavallo", it: "Caciocavallo al forno", en: "Baked caciocavallo", de: "Gebackener Caciocavallo" },
+    { key: "merluzzo", it: "Merluzzo al forno", en: "Baked cod", de: "Gebackener Kabeljau" }
   ]
 };
 
@@ -71,32 +61,34 @@ export default function MenuForm({ allChoices, setAllChoices }) {
   const [otherChoice, setOtherChoice] = useState("");
 
   const t = translations[language];
-  const getLabel = (obj) => obj[language];
+  const getLabel = (dish) => dish[language];
 
-  const handleQuantityChange = (dish, value) => {
+  const handleQuantityChange = (key, value) => {
     setQuantities((prev) => ({
       ...prev,
-      [dish]: parseInt(value) || 0
+      [key]: parseInt(value) || 0
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!room) {
-      alert(t.roomPlaceholder);
+    if (!room.trim()) {
+      alert(t.alertRoom);
       return;
     }
 
-    const choices = { ...quantities };
+    const selected = { ...quantities };
     if (otherChoice.trim()) {
-      choices["Altro"] = otherChoice.trim();
+      selected["other"] = otherChoice.trim();
     }
 
-    setAllChoices([...allChoices, { room, choices }]);
+    setAllChoices([...allChoices, { room, choices: selected }]);
+
     setRoom("");
     setQuantities({});
     setOtherChoice("");
-    alert("Scelta inviata!");
+
+    alert(t.alertSent);
   };
 
   return (
@@ -113,11 +105,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       }}
     >
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <img
-          src={logo}
-          alt="Logo"
-          style={{ maxWidth: "180px", marginBottom: "20px" }}
-        />
+        <img src={logo} alt="Logo" style={{ maxWidth: "180px", marginBottom: "20px" }} />
         <h2 style={{ color: "#4a5f44", fontSize: "26px" }}>{t.title}</h2>
       </div>
 
@@ -139,12 +127,10 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         </select>
       </label>
 
-      <br />
-      <br />
+      <br /><br />
 
       <label>
-        <strong>{t.roomLabel}:</strong>
-        <br />
+        <strong>{t.roomLabel}:</strong><br />
         <input
           type="text"
           value={room}
@@ -160,20 +146,17 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         />
       </label>
 
-      <br />
-      <br />
+      <br /><br />
 
       <h3 style={{ color: "#4a5f44" }}>{t.firstCourses}</h3>
-      {menuData.firstCourses.map((dish, idx) => (
-        <div key={idx} style={{ marginBottom: "10px" }}>
+      {menuData.firstCourses.map((dish) => (
+        <div key={dish.key} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
           <input
             type="number"
             min="0"
-            value={quantities[getLabel(dish)] || ""}
-            onChange={(e) =>
-              handleQuantityChange(getLabel(dish), e.target.value)
-            }
+            value={quantities[dish.key] || ""}
+            onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
             style={{
               width: "60px",
               marginLeft: "10px",
@@ -185,16 +168,14 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       ))}
 
       <h3 style={{ color: "#4a5f44", marginTop: "20px" }}>{t.secondCourses}</h3>
-      {menuData.secondCourses.map((dish, idx) => (
-        <div key={idx} style={{ marginBottom: "10px" }}>
+      {menuData.secondCourses.map((dish) => (
+        <div key={dish.key} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
           <input
             type="number"
             min="0"
-            value={quantities[getLabel(dish)] || ""}
-            onChange={(e) =>
-              handleQuantityChange(getLabel(dish), e.target.value)
-            }
+            value={quantities[dish.key] || ""}
+            onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
             style={{
               width: "60px",
               marginLeft: "10px",
@@ -208,8 +189,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <br />
 
       <label>
-        <strong>{t.otherLabel}:</strong>
-        <br />
+        <strong>{t.otherLabel}:</strong><br />
         <input
           type="text"
           value={otherChoice}
@@ -225,8 +205,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         />
       </label>
 
-      <br />
-      <br />
+      <br /><br />
 
       <button
         type="submit"
@@ -246,6 +225,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
     </form>
   );
 }
+
 
 
 
