@@ -12,8 +12,7 @@ const translations = {
     otherLabel: "Altro (inserire piatti alternativi)",
     otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
     submit: "Invia scelta",
-    alertRoom: "Inserisci il numero della stanza.",
-    alertSent: "Scelta inviata con successo!",
+    otherKey: "Altro"
   },
   en: {
     title: "Menu of the Day",
@@ -25,8 +24,7 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
-    alertRoom: "Please enter your room number.",
-    alertSent: "Choice submitted successfully!",
+    otherKey: "Other"
   },
   de: {
     title: "Tagesmenü",
@@ -38,21 +36,18 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
-    alertRoom: "Bitte geben Sie Ihre Zimmernummer ein.",
-    alertSent: "Auswahl erfolgreich übermittelt!",
+    otherKey: "Andere"
   }
 };
 
 const menuData = {
   firstCourses: [
     {
-      key: "cavatelli",
       it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata",
       en: "Homemade cavatelli with potatoes and smoked provola",
       de: "Hausgemachte Cavatelli mit Kartoffeln und geräucherter Provola"
     },
     {
-      key: "tagliolini",
       it: "Tagliolini al sugo di granchio",
       en: "Tagliolini with crab sauce",
       de: "Tagliolini mit Krabbensoße"
@@ -60,13 +55,11 @@ const menuData = {
   ],
   secondCourses: [
     {
-      key: "maialino",
       it: "Filetto di maialino al tartufo",
       en: "Pork fillet with truffle",
       de: "Schweinefilet mit Trüffel"
     },
     {
-      key: "spiedino",
       it: "Spiedino di pesce",
       en: "Fish skewer",
       de: "Fischspieß"
@@ -81,34 +74,32 @@ export default function MenuForm({ allChoices, setAllChoices }) {
   const [otherChoice, setOtherChoice] = useState("");
 
   const t = translations[language];
-  const getLabel = (dish) => dish[language];
+  const getLabel = (obj) => obj[language];
 
-  const handleQuantityChange = (key, value) => {
+  const handleQuantityChange = (dish, value) => {
     setQuantities((prev) => ({
       ...prev,
-      [key]: parseInt(value) || 0
+      [dish]: parseInt(value) || 0
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!room.trim()) {
-      alert(t.alertRoom);
+    if (!room) {
+      alert(t.roomPlaceholder);
       return;
     }
 
-    const selected = { ...quantities };
+    const choices = { ...quantities };
     if (otherChoice.trim()) {
-      selected["other"] = otherChoice.trim();
+      choices["other"] = otherChoice.trim(); // 👈 chiave standard per "altro"
     }
 
-    setAllChoices([...allChoices, { room, choices: selected }]);
-
+    setAllChoices([...allChoices, { room, choices }]);
     setRoom("");
     setQuantities({});
     setOtherChoice("");
-
-    alert(t.alertSent);
+    alert(t.submit);
   };
 
   return (
@@ -125,7 +116,11 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       }}
     >
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
-        <img src={logo} alt="Logo" style={{ maxWidth: "180px", marginBottom: "20px" }} />
+        <img
+          src={logo}
+          alt="Logo"
+          style={{ maxWidth: "180px", marginBottom: "20px" }}
+        />
         <h2 style={{ color: "#4a5f44", fontSize: "26px" }}>{t.title}</h2>
       </div>
 
@@ -147,10 +142,12 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         </select>
       </label>
 
-      <br /><br />
+      <br />
+      <br />
 
       <label>
-        <strong>{t.roomLabel}:</strong><br />
+        <strong>{t.roomLabel}:</strong>
+        <br />
         <input
           type="number"
           inputMode="numeric"
@@ -168,18 +165,21 @@ export default function MenuForm({ allChoices, setAllChoices }) {
         />
       </label>
 
-      <br /><br />
+      <br />
+      <br />
 
       <h3 style={{ color: "#4a5f44" }}>{t.firstCourses}</h3>
-      {menuData.firstCourses.map((dish) => (
-        <div key={dish.key} style={{ marginBottom: "10px" }}>
+      {menuData.firstCourses.map((dish, idx) => (
+        <div key={idx} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
           <input
             type="number"
             inputMode="numeric"
             min="0"
-            value={quantities[dish.key] || ""}
-            onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
+            value={quantities[getLabel(dish)] || ""}
+            onChange={(e) =>
+              handleQuantityChange(getLabel(dish), e.target.value)
+            }
             style={{
               width: "60px",
               marginLeft: "10px",
@@ -192,15 +192,17 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       ))}
 
       <h3 style={{ color: "#4a5f44", marginTop: "20px" }}>{t.secondCourses}</h3>
-      {menuData.secondCourses.map((dish) => (
-        <div key={dish.key} style={{ marginBottom: "10px" }}>
+      {menuData.secondCourses.map((dish, idx) => (
+        <div key={idx} style={{ marginBottom: "10px" }}>
           {getLabel(dish)}:
           <input
             type="number"
             inputMode="numeric"
             min="0"
-            value={quantities[dish.key] || ""}
-            onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
+            value={quantities[getLabel(dish)] || ""}
+            onChange={(e) =>
+              handleQuantityChange(getLabel(dish), e.target.value)
+            }
             style={{
               width: "60px",
               marginLeft: "10px",
@@ -215,7 +217,8 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <br />
 
       <label>
-        <strong>{t.otherLabel}:</strong><br />
+        <strong>{t.otherLabel}:</strong>
+        <br />
         <input
           type="text"
           value={otherChoice}
@@ -226,12 +229,14 @@ export default function MenuForm({ allChoices, setAllChoices }) {
             padding: "8px",
             borderRadius: "6px",
             marginTop: "4px",
-            backgroundColor: "#f1f1f1"
+            backgroundColor: "#f1f1f1",
+            color: "#000"
           }}
         />
       </label>
 
-      <br /><br />
+      <br />
+      <br />
 
       <button
         type="submit"
