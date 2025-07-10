@@ -45,12 +45,32 @@ const translations = {
 
 const menuData = {
   firstCourses: [
-    { key: "pennette", it: "Pennette all'arrabbiata", en: "Penne arrabbiata", de: "Penne all’arrabbiata" },
-    { key: "gnocchi", it: "Gnocchi al salmone", en: "Salmon gnocchi", de: "Lachs-Gnocchi" }
+    {
+      key: "cavatelli",
+      it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata",
+      en: "Homemade cavatelli with potatoes and smoked provola",
+      de: "Hausgemachte Cavatelli mit Kartoffeln und geräucherter Provola"
+    },
+    {
+      key: "tagliolini",
+      it: "Tagliolini al sugo di granchio",
+      en: "Tagliolini with crab sauce",
+      de: "Tagliolini mit Krabbensoße"
+    }
   ],
   secondCourses: [
-    { key: "caciocavallo", it: "Caciocavallo al forno", en: "Baked caciocavallo", de: "Gebackener Caciocavallo" },
-    { key: "merluzzo", it: "Merluzzo al forno", en: "Baked cod", de: "Gebackener Kabeljau" }
+    {
+      key: "maialino",
+      it: "Filetto di maialino al tartufo",
+      en: "Pork fillet with truffle",
+      de: "Schweinefilet mit Trüffel"
+    },
+    {
+      key: "spiedino",
+      it: "Spiedino di pesce",
+      en: "Fish skewer",
+      de: "Fischspieß"
+    }
   ]
 };
 
@@ -132,7 +152,8 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       <label>
         <strong>{t.roomLabel}:</strong><br />
         <input
-          type="text"
+          type="number"
+          inputMode="numeric"
           value={room}
           onChange={(e) => setRoom(e.target.value)}
           placeholder={t.roomPlaceholder}
@@ -141,7 +162,8 @@ export default function MenuForm({ allChoices, setAllChoices }) {
             padding: "8px",
             borderRadius: "6px",
             marginTop: "4px",
-            backgroundColor: "#f1f1f1"
+            backgroundColor: "#f1f1f1",
+            color: "#000"
           }}
         />
       </label>
@@ -154,6 +176,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           {getLabel(dish)}:
           <input
             type="number"
+            inputMode="numeric"
             min="0"
             value={quantities[dish.key] || ""}
             onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
@@ -161,7 +184,8 @@ export default function MenuForm({ allChoices, setAllChoices }) {
               width: "60px",
               marginLeft: "10px",
               padding: "4px",
-              backgroundColor: "#f1f1f1"
+              backgroundColor: "#f1f1f1",
+              color: "#000"
             }}
           />
         </div>
@@ -173,6 +197,7 @@ export default function MenuForm({ allChoices, setAllChoices }) {
           {getLabel(dish)}:
           <input
             type="number"
+            inputMode="numeric"
             min="0"
             value={quantities[dish.key] || ""}
             onChange={(e) => handleQuantityChange(dish.key, e.target.value)}
@@ -180,7 +205,8 @@ export default function MenuForm({ allChoices, setAllChoices }) {
               width: "60px",
               marginLeft: "10px",
               padding: "4px",
-              backgroundColor: "#f1f1f1"
+              backgroundColor: "#f1f1f1",
+              color: "#000"
             }}
           />
         </div>
