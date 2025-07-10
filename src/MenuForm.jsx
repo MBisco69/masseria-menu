@@ -24,7 +24,7 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
-    otherKey: "Other"
+    otherKey: "Altro"
   },
   de: {
     title: "Tagesmenü",
@@ -36,7 +36,7 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
-    otherKey: "Andere"
+    otherKey: "Altro"
   }
 };
 
@@ -90,30 +90,32 @@ export default function MenuForm({ allChoices, setAllChoices }) {
       return;
     }
 
-    const choices = { ...quantities };
-    if (otherChoice.trim()) {
-      choices["other"] = otherChoice.trim();
-    }
+    const choices = {};
 
-    setAllChoices([...allChoices, { room, choices }]);
+    Object.entries(quantities).forEach(([dishLabel, qty]) => {
+      if (qty > 0) {
+        const dishInIt = [...menuData.firstCourses, ...menuData.secondCourses].find(
+          (dish) => dish[language] === dishLabel
+        )?.it;
 
-    // Messaggio riepilogativo tradotto
-    let summary = `📍 ${t.roomLabel}: ${room}\n`;
-    Object.entries(choices).forEach(([dish, qty]) => {
-      if (dish === "other") {
-        summary += `📝 ${t.otherLabel}: ${qty}\n`;
-      } else if (qty > 0) {
-        summary += `🍽️ ${dish}: ${qty}\n`;
+        if (dishInIt) {
+          choices[dishInIt] = qty;
+        } else {
+          choices[dishLabel] = qty;
+        }
       }
     });
 
-    alert(summary);
+    if (otherChoice.trim()) {
+      choices["Altro"] = otherChoice.trim();
+    }
 
-    // Reset campi
+    setAllChoices([...allChoices, { room, choices }]);
     setRoom("");
     setQuantities({});
     setOtherChoice("");
-  }
+    alert("Ordine inviato con successo!");
+  };
 
   return (
     <form
