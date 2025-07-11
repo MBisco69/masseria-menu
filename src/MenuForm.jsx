@@ -14,7 +14,8 @@ const translations = {
     otherLabel: "Altro (inserire piatti alternativi)",
     otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
     submit: "Invia scelta",
-    otherKey: "Altro"
+    otherKey: "Altro",
+    noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
     title: "Menu of the Day",
@@ -26,7 +27,8 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
-    otherKey: "Altro"
+    otherKey: "Altro",
+    noStarter: "I don't want the seafood starter"
   },
   de: {
     title: "Tagesmenü",
@@ -38,7 +40,8 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
-    otherKey: "Altro"
+    otherKey: "Altro",
+    noStarter: "Ich möchte keine Meeresfrüchte-Vorspeise"
   }
 };
 
@@ -74,6 +77,7 @@ export default function MenuForm() {
   const [room, setRoom] = useState("");
   const [quantities, setQuantities] = useState({});
   const [otherChoice, setOtherChoice] = useState("");
+  const [noStarter, setNoStarter] = useState(false);
 
   const t = translations[language];
   const getLabel = (obj) => obj[language];
@@ -112,11 +116,11 @@ export default function MenuForm() {
       choices["Altro"] = otherChoice.trim();
     }
 
-    // 🔥 Scrivi su Firebase (aggiunge una nuova scelta globale visibile da tutti)
     try {
       await push(ref(db, "scelte"), {
         room,
-        choices
+        choices,
+        noStarter
       });
       alert("Ordine inviato con successo!");
     } catch (error) {
@@ -127,6 +131,7 @@ export default function MenuForm() {
     setRoom("");
     setQuantities({});
     setOtherChoice("");
+    setNoStarter(false);
   };
 
   return (
@@ -169,7 +174,18 @@ export default function MenuForm() {
         </select>
       </label>
 
-      <br />
+      <div style={{ marginTop: "10px" }}>
+        <label style={{ color: "#4a5f44", fontWeight: "bold" }}>
+          <input
+            type="checkbox"
+            checked={noStarter}
+            onChange={(e) => setNoStarter(e.target.checked)}
+            style={{ marginRight: "8px" }}
+          />
+          {t.noStarter}
+        </label>
+      </div>
+
       <br />
 
       <label>

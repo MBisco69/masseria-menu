@@ -5,10 +5,10 @@ import { onValue, ref, remove } from "firebase/database";
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
 
-  const language = "it"; // pannello admin sempre in italiano
+  const language = "it";
   const otherKey = "Altro";
 
-  // 👂 Legge i dati in tempo reale da Firebase
+  // Lettura in tempo reale da Firebase
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
     const unsubscribe = onValue(scelteRef, (snapshot) => {
@@ -24,7 +24,7 @@ export default function AdminPanel() {
     return () => unsubscribe();
   }, []);
 
-  // 🔄 Calcolo dei totali
+  // Calcolo totali
   const totals = {};
   allChoices.forEach(({ choices }) => {
     Object.entries(choices).forEach(([dish, qty]) => {
@@ -36,7 +36,7 @@ export default function AdminPanel() {
     });
   });
 
-  // ❌ Reset globale: cancella tutto da Firebase
+  // Reset globale
   const handleReset = () => {
     const confirm = window.confirm("Vuoi davvero cancellare tutte le scelte?");
     if (confirm) {
@@ -51,13 +51,14 @@ export default function AdminPanel() {
       <h3 style={{ marginTop: "30px" }}>📋 Scelte per camera:</h3>
       <hr />
       <ul>
-        {allChoices.map(({ room, choices }, idx) => (
+        {allChoices.map(({ room, choices, noStarter }, idx) => (
           <li key={idx}>
             <strong>Camera {room}:</strong>{" "}
             {Object.entries(choices)
               .map(([dish, qty]) =>
                 dish === "Altro" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
               )
+              .concat(noStarter ? ["❌ Antipasto di mare"] : [])
               .join(", ")}
           </li>
         ))}
@@ -90,7 +91,3 @@ export default function AdminPanel() {
     </div>
   );
 }
-
-
-
-
