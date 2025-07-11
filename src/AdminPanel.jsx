@@ -54,12 +54,14 @@ export default function AdminPanel() {
         {allChoices.map(({ room, choices, noStarter }, idx) => (
           <li key={idx}>
             <strong>Camera {room}:</strong>{" "}
-            {Object.entries(choices)
-              .map(([dish, qty]) =>
+            {[
+              ...Object.entries(choices).map(([dish, qty]) =>
                 dish === "Altro" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
-              )
-              .concat(noStarter ? ["❌ Antipasto di mare"] : [])
-              .join(", ")}
+              ),
+              noStarter === true
+                ? "❌ Antipasto di mare"
+                : "✅ Antipasto di mare"
+            ].join(", ")}
           </li>
         ))}
       </ul>
