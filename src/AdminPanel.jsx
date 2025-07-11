@@ -1,18 +1,33 @@
-export default function AdminPanel({ allChoices }) {
+import { useEffect, useState } from "react";
+import { db } from "./firebase";
+import { ref, onValue } from "firebase/database";
+
+export default function AdminPanel() {
+  const [allChoices, setAllChoices] = useState([]);
+
+  useEffect(() => {
+    const ordersRef = ref(db, "orders");
+    const unsubscribe = onValue(ordersRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const parsed = Object.values(data);
+        setAllChoices(parsed);
+      } else {
+        setAllChoices([]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const totals = {};
-
-  const language = "it"; // puoi dinamizzarlo se vuoi
-
-  const otherKey = {
-    it: "Altro",
-    en: "Other",
-    de: "Andere"
-  }[language];
+  const language = "it";
+  const otherKey = "Altro";
 
   allChoices.forEach(({ choices }) => {
     Object.entries(choices).forEach(([dish, qty]) => {
-      if (dish === "other") {
-        totals[otherKey] = choices[dish]; // metti direttamente la stringa
+      if (dish === "Altro") {
+        totals[otherKey] = qty; // stringa testuale, non sommabile
       } else {
         totals[dish] = (totals[dish] || 0) + qty;
       }
@@ -31,7 +46,7 @@ export default function AdminPanel({ allChoices }) {
             <strong>Camera {room}:</strong>{" "}
             {Object.entries(choices)
               .map(([dish, qty]) =>
-                dish === "other" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
+                dish === "Altro" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
               )
               .join(", ")}
           </li>
@@ -50,4 +65,5 @@ export default function AdminPanel({ allChoices }) {
     </div>
   );
 }
+
 
