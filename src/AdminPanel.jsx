@@ -2,13 +2,36 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
+const menuData = {
+  firstCourses: [
+    {
+      it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata",
+    },
+    {
+      it: "Tagliolini al sugo di granchio",
+    }
+  ],
+  secondCourses: [
+    {
+      it: "Filetto di maialino al tartufo",
+    },
+    {
+      it: "Spiedino di pesce",
+    }
+  ]
+};
+
+const allDishes = [
+  ...menuData.firstCourses.map(d => d.it),
+  ...menuData.secondCourses.map(d => d.it)
+];
+
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editData, setEditData] = useState({ room: "", choices: {}, antipasto: true });
   const [entryKeys, setEntryKeys] = useState([]);
 
-  const language = "it";
   const otherKey = "Altro";
 
   useEffect(() => {
@@ -52,7 +75,7 @@ export default function AdminPanel() {
     setEditData({
       room: current.room,
       choices: { ...current.choices },
-      antipasto: current.antipasto !== false // default true se undefined
+      antipasto: current.antipasto !== false // default true
     });
     setEditIndex(idx);
   };
@@ -79,9 +102,18 @@ export default function AdminPanel() {
 
   const handleSaveEdit = async () => {
     const key = entryKeys[editIndex];
+
+    // Rimuove i piatti con quantità 0
+    const cleanedChoices = {};
+    Object.entries(editData.choices).forEach(([dish, qty]) => {
+      if ((typeof qty === "number" && qty > 0) || (dish === otherKey && qty.trim())) {
+        cleanedChoices[dish] = qty;
+      }
+    });
+
     const updated = {
       room: editData.room,
-      choices: editData.choices,
+      choices: cleanedChoices,
       antipasto: editData.antipasto
     };
 
@@ -177,12 +209,12 @@ export default function AdminPanel() {
           >
             <h3>✏️ Modifica scelta - Camera {editData.room}</h3>
             <br />
-            {Object.entries(editData.choices).map(([dish, qty], idx) => (
+            {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
                 {dish}:{" "}
                 <input
                   type="number"
-                  value={qty}
+                  value={editData.choices[dish] || ""}
                   min="0"
                   onChange={(e) => handleEditChange(dish, e.target.value)}
                   style={{ width: "60px", marginLeft: "10px" }}
@@ -200,6 +232,16 @@ export default function AdminPanel() {
                 }
               />{" "}
               <span>{editData.antipasto ? "✅" : "❌"}</span>
+            </div>
+
+            <div style={{ marginTop: "20px" }}>
+              {otherKey}:{" "}
+              <input
+                type="text"
+                value={editData.choices[otherKey] || ""}
+                onChange={(e) => handleOtherChange(e.target.value)}
+                style={{ width: "100%", marginTop: "6px" }}
+              />
             </div>
 
             <div style={{ marginTop: "30px", textAlign: "right" }}>
