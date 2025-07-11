@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
+// ✅ Nuovo menu del giorno
 const menuData = {
   firstCourses: [
-    { it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata" },
-    { it: "Tagliolini al sugo di granchio" }
+    { it: "Spaghetti aglio olio e peperoncino in crema di cavolfiore e pane aromatizzato all'acciuga" },
+    { it: "Tubettini di pasta con un brodetto di rana pescatrice" }
   ],
   secondCourses: [
-    { it: "Filetto di maialino al tartufo" },
-    { it: "Spiedino di pesce" }
+    { it: "Salsiccia alla griglia" },
+    { it: "Spigola al sale" }
   ]
 };
 
@@ -113,18 +114,20 @@ export default function AdminPanel() {
             @media print {
               body {
                 font-family: Arial, sans-serif;
-                padding: 30px;
+                padding: 40px;
                 margin: 0;
+                box-sizing: border-box;
               }
               img {
                 display: block;
-                margin: 0 auto 20px auto;
+                margin: 0 auto 30px auto;
                 max-width: 150px;
               }
               h2 {
                 text-align: center;
                 color: #4a5f44;
                 margin-bottom: 40px;
+                font-size: 24px;
               }
               ul {
                 list-style-type: none;
@@ -140,14 +143,28 @@ export default function AdminPanel() {
         </head>
         <body>
           ${printContent}
+          <script>
+            window.onload = function() {
+              window.print();
+              window.onafterprint = function() {
+                window.close();
+              };
+            };
+          </script>
         </body>
       </html>
     `);
     win.document.close();
-    win.focus();
-    win.print();
-    win.close();
   };
+
+  const totals = allChoices.reduce((acc, entry) => {
+    Object.entries(entry.choices).forEach(([dish, qty]) => {
+      if (dish !== otherKey) {
+        acc[dish] = (acc[dish] || 0) + qty;
+      }
+    });
+    return acc;
+  }, {});
 
   return (
     <div style={{ padding: "30px", color: "#2e3e4f", position: "relative" }}>
@@ -201,6 +218,14 @@ export default function AdminPanel() {
         ))}
       </ul>
 
+      <h3 style={{ marginTop: "30px" }}>🍽️ Totale piatti per tipo:</h3>
+      <hr />
+      <ul>
+        {Object.entries(totals).map(([dish, qty], idx) => (
+          <li key={idx}>{`${dish}: ${qty}`}</li>
+        ))}
+      </ul>
+
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <button
           onClick={handleReset}
@@ -218,7 +243,6 @@ export default function AdminPanel() {
         </button>
       </div>
 
-      {/* Sezione nascosta per la stampa */}
       <div ref={printRef} style={{ display: "none" }}>
         <img src="/logo.png" alt="Logo Masseria" />
         <h2>Ordini per camera</h2>
@@ -232,8 +256,7 @@ export default function AdminPanel() {
                 )
                 .join(", ")}
               {" — "}
-              Antipasto di mare:{" "}
-              {antipasto === false ? "❌" : "✅"}
+              Antipasto di mare: {antipasto === false ? "❌" : "✅"}
             </li>
           ))}
         </ul>
