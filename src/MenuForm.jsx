@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { getDatabase, push, ref } from "firebase/database";
 import logo from "./assets/logo.png";
+import { db } from "./firebase";
+import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
@@ -13,7 +14,6 @@ const translations = {
     otherLabel: "Altro (inserire piatti alternativi)",
     otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
     submit: "Invia scelta",
-    success: "Ordine inviato con successo!",
     otherKey: "Altro"
   },
   en: {
@@ -26,7 +26,6 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
-    success: "Order sent successfully!",
     otherKey: "Altro"
   },
   de: {
@@ -39,7 +38,6 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
-    success: "Bestellung erfolgreich gesendet!",
     otherKey: "Altro"
   }
 };
@@ -80,8 +78,6 @@ export default function MenuForm() {
   const t = translations[language];
   const getLabel = (obj) => obj[language];
 
-  const db = getDatabase();
-
   const handleQuantityChange = (dish, value) => {
     setQuantities((prev) => ({
       ...prev,
@@ -91,7 +87,6 @@ export default function MenuForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!room) {
       alert(t.roomPlaceholder);
       return;
@@ -117,18 +112,21 @@ export default function MenuForm() {
       choices["Altro"] = otherChoice.trim();
     }
 
-    // Salva su Firebase
-    const ordersRef = ref(db, "orders");
-    await push(ordersRef, {
-      room,
-      choices
-    });
+    // 🔥 Scrivi su Firebase (aggiunge una nuova scelta globale visibile da tutti)
+    try {
+      await push(ref(db, "scelte"), {
+        room,
+        choices
+      });
+      alert("Ordine inviato con successo!");
+    } catch (error) {
+      console.error("Errore durante il salvataggio:", error);
+      alert("Si è verificato un errore durante l'invio dell'ordine.");
+    }
 
-    // Reset form
     setRoom("");
     setQuantities({});
     setOtherChoice("");
-    alert(t.success);
   };
 
   return (

@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
-import { ref, onValue, remove } from "firebase/database";
+import { onValue, ref, remove } from "firebase/database";
 
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
 
+  const language = "it"; // pannello admin sempre in italiano
+  const otherKey = "Altro";
+
+  // 👂 Legge i dati in tempo reale da Firebase
   useEffect(() => {
-    const choicesRef = ref(db, "orders");
-    const unsubscribe = onValue(choicesRef, (snapshot) => {
+    const scelteRef = ref(db, "scelte");
+    const unsubscribe = onValue(scelteRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const choicesArray = Object.values(data);
-        setAllChoices(choicesArray);
+        const array = Object.values(data);
+        setAllChoices(array);
       } else {
         setAllChoices([]);
       }
@@ -20,21 +24,8 @@ export default function AdminPanel() {
     return () => unsubscribe();
   }, []);
 
-  const handleReset = () => {
-    const confirmed = window.confirm("Sei sicuro di voler cancellare tutte le scelte?");
-    if (confirmed) {
-      remove(ref(db, "orders"));
-    }
-  };
-
+  // 🔄 Calcolo dei totali
   const totals = {};
-  const language = "it";
-  const otherKey = {
-    it: "Altro",
-    en: "Other",
-    de: "Andere"
-  }[language];
-
   allChoices.forEach(({ choices }) => {
     Object.entries(choices).forEach(([dish, qty]) => {
       if (dish === "Altro") {
@@ -44,6 +35,14 @@ export default function AdminPanel() {
       }
     });
   });
+
+  // ❌ Reset globale: cancella tutto da Firebase
+  const handleReset = () => {
+    const confirm = window.confirm("Vuoi davvero cancellare tutte le scelte?");
+    if (confirm) {
+      remove(ref(db, "scelte"));
+    }
+  };
 
   return (
     <div style={{ padding: "30px", color: "#2e3e4f" }}>
@@ -56,7 +55,9 @@ export default function AdminPanel() {
           <li key={idx}>
             <strong>Camera {room}:</strong>{" "}
             {Object.entries(choices)
-              .map(([dish, qty]) => `${dish}: ${qty}`)
+              .map(([dish, qty]) =>
+                dish === "Altro" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
+              )
               .join(", ")}
           </li>
         ))}
@@ -66,26 +67,26 @@ export default function AdminPanel() {
       <hr />
       <ul>
         {Object.entries(totals).map(([dish, qty], idx) => (
-          <li key={idx}>{dish}: {qty}</li>
+          <li key={idx}>{`${dish}: ${qty}`}</li>
         ))}
       </ul>
 
-      <br />
-      <button
-        onClick={handleReset}
-        style={{
-          marginTop: "30px",
-          backgroundColor: "#d9534f",
-          color: "white",
-          padding: "12px 24px",
-          border: "none",
-          borderRadius: "8px",
-          fontSize: "16px",
-          cursor: "pointer"
-        }}
-      >
-        ❌ Reset scelte
-      </button>
+      <div style={{ textAlign: "center", marginTop: "30px" }}>
+        <button
+          onClick={handleReset}
+          style={{
+            backgroundColor: "#a94444",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            cursor: "pointer"
+          }}
+        >
+          ❌ Reset scelte
+        </button>
+      </div>
     </div>
   );
 }
