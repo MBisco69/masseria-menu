@@ -6,16 +6,12 @@ export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
   const printRef = useRef(null);
 
-  const language = "it";
-  const otherKey = "Altro";
-
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
     const unsubscribe = onValue(scelteRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const array = Object.values(data);
-        setAllChoices(array);
+        setAllChoices(Object.values(data));
       } else {
         setAllChoices([]);
       }
@@ -36,45 +32,55 @@ export default function AdminPanel() {
     const printWindow = window.open("", "", "width=1000,height=800");
 
     if (printWindow) {
-      const logoURL = `${window.location.origin}/assets/logo.png`;
-
       printWindow.document.write(`
         <html>
           <head>
-            <title>Stampa Ordini per Camera</title>
+            <title>Ordini per camera</title>
             <style>
+              @page {
+                margin: 0;
+              }
+
               body {
                 font-family: sans-serif;
-                padding: 60px;
-                font-size: 18px;
+                padding: 40px 60px;
+                font-size: 14pt;
                 color: #2e3e4f;
-                line-height: 2.2;
+                line-height: 1.8;
+                -webkit-print-color-adjust: exact;
               }
+
               h2 {
                 color: #4a5f44;
                 text-align: center;
-                font-size: 28px;
+                font-size: 24pt;
                 margin-bottom: 30px;
               }
+
+              img {
+                display: block;
+                margin: 0 auto 20px;
+                max-width: 140px;
+              }
+
               ul {
                 list-style: none;
                 padding-left: 0;
               }
+
               li {
-                margin-bottom: 20px;
+                margin-bottom: 16px;
               }
-              img {
-                display: block;
-                margin: 0 auto 30px;
-                max-width: 160px;
-              }
+
               @media print {
-                button { display: none; }
+                button, .no-print {
+                  display: none !important;
+                }
               }
             </style>
           </head>
           <body>
-            <img src="${logoURL}" alt="Logo Masseria" />
+            <img src="/logo.png" alt="Logo Masseria" />
             <h2>Ordini per camera</h2>
             ${printContent}
           </body>
@@ -100,7 +106,7 @@ export default function AdminPanel() {
               <strong>Camera {room}:</strong>{" "}
               {Object.entries(choices)
                 .map(([dish, qty]) =>
-                  dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
+                  dish === "Altro" ? `Altro: ${qty}` : `${dish}: ${qty}`
                 )
                 .join(", ")}
               {typeof wantsAppetizer === "boolean" && (
@@ -116,6 +122,7 @@ export default function AdminPanel() {
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <button
           onClick={handleReset}
+          className="no-print"
           style={{
             backgroundColor: "#a94444",
             color: "white",
@@ -132,6 +139,7 @@ export default function AdminPanel() {
 
         <button
           onClick={handlePrint}
+          className="no-print"
           style={{
             backgroundColor: "#4a5f44",
             color: "white",
