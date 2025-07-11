@@ -48,29 +48,30 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata",
-      en: "Homemade cavatelli with potatoes and smoked provola",
-      de: "Hausgemachte Cavatelli mit Kartoffeln und geräucherter Provola"
+      it: "Spaghetti aglio olio e peperoncino in crema di cavolfiore e pane aromatizzato all'acciuga",
+      en: "Spaghetti with garlic, oil and chili in cauliflower cream with anchovy-flavored bread",
+      de: "Spaghetti mit Knoblauch, Öl und Chili in Blumenkohlcreme mit Anchovybrot"
     },
     {
-      it: "Tagliolini al sugo di granchio",
-      en: "Tagliolini with crab sauce",
-      de: "Tagliolini mit Krabbensoße"
+      it: "Tubettini di pasta con un brodetto di rana pescatrice",
+      en: "Small pasta tubes in a monkfish broth",
+      de: "Kleine Nudeln in einem Seeteufel-Fischsud"
     }
   ],
   secondCourses: [
     {
-      it: "Filetto di maialino al tartufo",
-      en: "Pork fillet with truffle",
-      de: "Schweinefilet mit Trüffel"
+      it: "Salsiccia alla griglia",
+      en: "Grilled sausage",
+      de: "Gegrillte Wurst"
     },
     {
-      it: "Spiedino di pesce",
-      en: "Fish skewer",
-      de: "Fischspieß"
+      it: "Spigola al sale",
+      en: "Salt-baked sea bass",
+      de: "Wolfsbarsch in Salzkruste"
     }
   ]
 };
+
 
 export default function MenuForm() {
   const [language, setLanguage] = useState("it");
