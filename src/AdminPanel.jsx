@@ -9,7 +9,6 @@ export default function AdminPanel() {
   const language = "it";
   const otherKey = "Altro";
 
-  // Lettura dati in tempo reale da Firebase
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
     const unsubscribe = onValue(scelteRef, (snapshot) => {
@@ -25,25 +24,6 @@ export default function AdminPanel() {
     return () => unsubscribe();
   }, []);
 
-  // Calcolo totali
-  const totals = {};
-  allChoices.forEach(({ choices, wantsAppetizer }) => {
-    Object.entries(choices).forEach(([dish, qty]) => {
-      if (dish === otherKey) {
-        totals[otherKey] = qty;
-      } else {
-        totals[dish] = (totals[dish] || 0) + qty;
-      }
-    });
-
-    if (wantsAppetizer === false) {
-      totals["Antipasto di mare ❌"] = (totals["Antipasto di mare ❌"] || 0) + 1;
-    } else if (wantsAppetizer === true) {
-      totals["Antipasto di mare ✅"] = (totals["Antipasto di mare ✅"] || 0) + 1;
-    }
-  });
-
-  // Reset globale
   const handleReset = () => {
     const confirm = window.confirm("Vuoi davvero cancellare tutte le scelte?");
     if (confirm) {
@@ -51,53 +31,42 @@ export default function AdminPanel() {
     }
   };
 
-  // Stampa popup con logo e timestamp
   const handlePrint = () => {
     const printContent = printRef.current.innerHTML;
     const printWindow = window.open("", "", "width=1000,height=800");
 
     if (printWindow) {
       const logoURL = `${window.location.origin}/assets/logo.png`;
-      const now = new Date();
-      const timestamp = now.toLocaleString("it-IT", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
 
       printWindow.document.write(`
         <html>
           <head>
-            <title>Stampa Ordini</title>
+            <title>Stampa Ordini per Camera</title>
             <style>
               body {
                 font-family: sans-serif;
-                padding: 30px;
-                font-size: 14px;
+                padding: 60px;
+                font-size: 18px;
                 color: #2e3e4f;
+                line-height: 2.2;
               }
-              h2, h3 {
+              h2 {
                 color: #4a5f44;
-                margin-bottom: 10px;
+                text-align: center;
+                font-size: 28px;
+                margin-bottom: 30px;
               }
               ul {
-                padding-left: 20px;
+                list-style: none;
+                padding-left: 0;
               }
-              hr {
-                margin: 16px 0;
-                border: none;
-                border-top: 1px solid #ccc;
-              }
-              img {
-                max-width: 160px;
+              li {
                 margin-bottom: 20px;
               }
-              .timestamp {
-                margin-top: 20px;
-                font-size: 12px;
-                color: #888;
+              img {
+                display: block;
+                margin: 0 auto 30px;
+                max-width: 160px;
               }
               @media print {
                 button { display: none; }
@@ -105,14 +74,13 @@ export default function AdminPanel() {
             </style>
           </head>
           <body>
-            <div style="text-align: center;">
-              <img src="${logoURL}" alt="Logo" />
-            </div>
+            <img src="${logoURL}" alt="Logo Masseria" />
+            <h2>Ordini per camera</h2>
             ${printContent}
-            <div class="timestamp">Stampa generata il ${timestamp}</div>
           </body>
         </html>
       `);
+
       printWindow.document.close();
       printWindow.focus();
       printWindow.print();
@@ -126,9 +94,7 @@ export default function AdminPanel() {
       <h2 style={{ fontSize: "26px" }}>🛠️ Pannello Amministratore</h2>
 
       <div ref={printRef}>
-        <h3 style={{ marginTop: "30px" }}>📋 Scelte per camera:</h3>
-        <hr />
-        <ul>
+        <ul style={{ marginTop: "30px" }}>
           {allChoices.map(({ room, choices, wantsAppetizer }, idx) => (
             <li key={idx}>
               <strong>Camera {room}:</strong>{" "}
@@ -139,19 +105,10 @@ export default function AdminPanel() {
                 .join(", ")}
               {typeof wantsAppetizer === "boolean" && (
                 <span style={{ marginLeft: "10px" }}>
-                  • Antipasto di mare{" "}
-                  {wantsAppetizer ? "✅" : "❌"}
+                  • Antipasto di mare {wantsAppetizer ? "✅" : "❌"}
                 </span>
               )}
             </li>
-          ))}
-        </ul>
-
-        <h3 style={{ marginTop: "30px" }}>🍽️ Totale piatti per tipo:</h3>
-        <hr />
-        <ul>
-          {Object.entries(totals).map(([dish, qty], idx) => (
-            <li key={idx}>{`${dish}: ${qty}`}</li>
           ))}
         </ul>
       </div>
@@ -185,7 +142,7 @@ export default function AdminPanel() {
             cursor: "pointer"
           }}
         >
-          📄 Stampa ordini
+          🖨️ Stampa ordini
         </button>
       </div>
     </div>
