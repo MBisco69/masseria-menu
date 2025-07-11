@@ -3,7 +3,6 @@ import MenuForm from "./MenuForm";
 import AdminPanel from "./AdminPanel";
 
 export default function App() {
-  const [allChoices, setAllChoices] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminAuthenticated, setAdminAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
@@ -19,14 +18,9 @@ export default function App() {
     }
   };
 
-  const resetData = () => {
-    const confirm = window.confirm("Vuoi davvero cancellare tutte le scelte?");
-    if (confirm) setAllChoices([]);
-  };
-
   const handleToggleView = () => {
     setIsAdmin(!isAdmin);
-    setAdminAuthenticated(false); // Reimposta autenticazione ogni volta che si cambia vista
+    setAdminAuthenticated(false);
   };
 
   return (
@@ -51,25 +45,7 @@ export default function App() {
 
       {isAdmin ? (
         adminAuthenticated ? (
-          <div>
-            <AdminPanel allChoices={allChoices} />
-            <div style={{ textAlign: "center", marginTop: "30px" }}>
-              <button
-                onClick={resetData}
-                style={{
-                  backgroundColor: "#a94444",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "none",
-                  borderRadius: "8px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                ❌ Reset scelte
-              </button>
-            </div>
-          </div>
+          <AdminPanel />
         ) : (
           <div style={{ padding: "40px", textAlign: "center" }}>
             <h2 style={{ color: "#4a5f44" }}>Accesso Admin</h2>
@@ -100,10 +76,11 @@ export default function App() {
           </div>
         )
       ) : (
-        <MenuForm allChoices={allChoices} setAllChoices={setAllChoices} />
+        <MenuForm />
       )}
     </div>
   );
 }
+
 
 

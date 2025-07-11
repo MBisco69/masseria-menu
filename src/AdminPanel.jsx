@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, remove } from "firebase/database";
 
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
 
   useEffect(() => {
-    const ordersRef = ref(db, "orders");
-    const unsubscribe = onValue(ordersRef, (snapshot) => {
+    const choicesRef = ref(db, "orders");
+    const unsubscribe = onValue(choicesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const parsed = Object.values(data);
-        setAllChoices(parsed);
+        const choicesArray = Object.values(data);
+        setAllChoices(choicesArray);
       } else {
         setAllChoices([]);
       }
@@ -20,14 +20,25 @@ export default function AdminPanel() {
     return () => unsubscribe();
   }, []);
 
+  const handleReset = () => {
+    const confirmed = window.confirm("Sei sicuro di voler cancellare tutte le scelte?");
+    if (confirmed) {
+      remove(ref(db, "orders"));
+    }
+  };
+
   const totals = {};
   const language = "it";
-  const otherKey = "Altro";
+  const otherKey = {
+    it: "Altro",
+    en: "Other",
+    de: "Andere"
+  }[language];
 
   allChoices.forEach(({ choices }) => {
     Object.entries(choices).forEach(([dish, qty]) => {
       if (dish === "Altro") {
-        totals[otherKey] = qty; // stringa testuale, non sommabile
+        totals[otherKey] = qty;
       } else {
         totals[dish] = (totals[dish] || 0) + qty;
       }
@@ -45,9 +56,7 @@ export default function AdminPanel() {
           <li key={idx}>
             <strong>Camera {room}:</strong>{" "}
             {Object.entries(choices)
-              .map(([dish, qty]) =>
-                dish === "Altro" ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
-              )
+              .map(([dish, qty]) => `${dish}: ${qty}`)
               .join(", ")}
           </li>
         ))}
@@ -57,13 +66,30 @@ export default function AdminPanel() {
       <hr />
       <ul>
         {Object.entries(totals).map(([dish, qty], idx) => (
-          <li key={idx}>
-            {dish === otherKey ? `${dish}: ${qty}` : `${dish}: ${qty}`}
-          </li>
+          <li key={idx}>{dish}: {qty}</li>
         ))}
       </ul>
+
+      <br />
+      <button
+        onClick={handleReset}
+        style={{
+          marginTop: "30px",
+          backgroundColor: "#d9534f",
+          color: "white",
+          padding: "12px 24px",
+          border: "none",
+          borderRadius: "8px",
+          fontSize: "16px",
+          cursor: "pointer"
+        }}
+      >
+        ❌ Reset scelte
+      </button>
     </div>
   );
 }
+
+
 
 

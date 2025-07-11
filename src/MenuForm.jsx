@@ -1,7 +1,6 @@
 import { useState } from "react";
+import { getDatabase, push, ref } from "firebase/database";
 import logo from "./assets/logo.png";
-import { db } from "./firebase";
-import { ref, push } from "firebase/database";
 
 const translations = {
   it: {
@@ -14,8 +13,8 @@ const translations = {
     otherLabel: "Altro (inserire piatti alternativi)",
     otherPlaceholder: "Riportare anche allergie e intolleranze, se presenti",
     submit: "Invia scelta",
-    otherKey: "Altro",
-    success: "Ordine inviato con successo!"
+    success: "Ordine inviato con successo!",
+    otherKey: "Altro"
   },
   en: {
     title: "Menu of the Day",
@@ -27,8 +26,8 @@ const translations = {
     otherLabel: "Other (insert alternatives)",
     otherPlaceholder: "Also report allergies or intolerances, if any",
     submit: "Submit choice",
-    otherKey: "Altro",
-    success: "Order sent successfully!"
+    success: "Order sent successfully!",
+    otherKey: "Altro"
   },
   de: {
     title: "Tagesmenü",
@@ -40,8 +39,8 @@ const translations = {
     otherLabel: "Andere (bitte Alternativen angeben)",
     otherPlaceholder: "Bitte auch Allergien und Unverträglichkeiten angeben",
     submit: "Auswahl senden",
-    otherKey: "Altro",
-    success: "Bestellung erfolgreich gesendet!"
+    success: "Bestellung erfolgreich gesendet!",
+    otherKey: "Altro"
   }
 };
 
@@ -81,6 +80,8 @@ export default function MenuForm() {
   const t = translations[language];
   const getLabel = (obj) => obj[language];
 
+  const db = getDatabase();
+
   const handleQuantityChange = (dish, value) => {
     setQuantities((prev) => ({
       ...prev,
@@ -90,6 +91,7 @@ export default function MenuForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!room) {
       alert(t.roomPlaceholder);
       return;
@@ -97,14 +99,17 @@ export default function MenuForm() {
 
     const choices = {};
 
-    // Convert dish labels to IT for saving
-    Object.entries(quantities).forEach(([label, qty]) => {
+    Object.entries(quantities).forEach(([dishLabel, qty]) => {
       if (qty > 0) {
-        const original = [...menuData.firstCourses, ...menuData.secondCourses].find(
-          (dish) => dish[language] === label
-        );
-        const italianLabel = original ? original.it : label;
-        choices[italianLabel] = qty;
+        const dishInIt = [...menuData.firstCourses, ...menuData.secondCourses].find(
+          (dish) => dish[language] === dishLabel
+        )?.it;
+
+        if (dishInIt) {
+          choices[dishInIt] = qty;
+        } else {
+          choices[dishLabel] = qty;
+        }
       }
     });
 
@@ -112,22 +117,18 @@ export default function MenuForm() {
       choices["Altro"] = otherChoice.trim();
     }
 
-    const newEntry = {
+    // Salva su Firebase
+    const ordersRef = ref(db, "orders");
+    await push(ordersRef, {
       room,
-      choices,
-      timestamp: Date.now()
-    };
+      choices
+    });
 
-    try {
-      await push(ref(db, "orders"), newEntry);
-      alert(t.success);
-      setRoom("");
-      setQuantities({});
-      setOtherChoice("");
-    } catch (error) {
-      alert("Errore nell'invio dell'ordine.");
-      console.error(error);
-    }
+    // Reset form
+    setRoom("");
+    setQuantities({});
+    setOtherChoice("");
+    alert(t.success);
   };
 
   return (
@@ -284,3 +285,4 @@ export default function MenuForm() {
     </form>
   );
 }
+
