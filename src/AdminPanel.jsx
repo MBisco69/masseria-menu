@@ -1,23 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
 const menuData = {
   firstCourses: [
-    {
-      it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata",
-    },
-    {
-      it: "Tagliolini al sugo di granchio",
-    }
+    { it: "Cavatelli (pasta fresca fatta in casa) con patate e provola affumicata" },
+    { it: "Tagliolini al sugo di granchio" }
   ],
   secondCourses: [
-    {
-      it: "Filetto di maialino al tartufo",
-    },
-    {
-      it: "Spiedino di pesce",
-    }
+    { it: "Filetto di maialino al tartufo" },
+    { it: "Spiedino di pesce" }
   ]
 };
 
@@ -32,6 +24,7 @@ export default function AdminPanel() {
   const [editData, setEditData] = useState({ room: "", choices: {}, antipasto: true });
   const [entryKeys, setEntryKeys] = useState([]);
 
+  const printRef = useRef();
   const otherKey = "Altro";
 
   useEffect(() => {
@@ -52,17 +45,6 @@ export default function AdminPanel() {
     return () => unsubscribe();
   }, []);
 
-  const totals = {};
-  allChoices.forEach(({ choices }) => {
-    Object.entries(choices).forEach(([dish, qty]) => {
-      if (dish === otherKey) {
-        totals[otherKey] = qty;
-      } else {
-        totals[dish] = (totals[dish] || 0) + qty;
-      }
-    });
-  });
-
   const handleReset = () => {
     const confirm = window.confirm("Vuoi davvero cancellare tutte le scelte?");
     if (confirm) {
@@ -75,7 +57,7 @@ export default function AdminPanel() {
     setEditData({
       room: current.room,
       choices: { ...current.choices },
-      antipasto: current.antipasto !== false // default true
+      antipasto: current.antipasto !== false
     });
     setEditIndex(idx);
   };
@@ -103,7 +85,6 @@ export default function AdminPanel() {
   const handleSaveEdit = async () => {
     const key = entryKeys[editIndex];
 
-    // Rimuove i piatti con quantità 0
     const cleanedChoices = {};
     Object.entries(editData.choices).forEach(([dish, qty]) => {
       if ((typeof qty === "number" && qty > 0) || (dish === otherKey && qty.trim())) {
@@ -121,9 +102,72 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
+  const handlePrint = () => {
+    const printContent = printRef.current.innerHTML;
+    const win = window.open("", "_blank");
+    win.document.write(`
+      <html>
+        <head>
+          <title>Stampa Ordini</title>
+          <style>
+            @media print {
+              body {
+                font-family: Arial, sans-serif;
+                padding: 30px;
+                margin: 0;
+              }
+              img {
+                display: block;
+                margin: 0 auto 20px auto;
+                max-width: 150px;
+              }
+              h2 {
+                text-align: center;
+                color: #4a5f44;
+                margin-bottom: 40px;
+              }
+              ul {
+                list-style-type: none;
+                padding: 0;
+              }
+              li {
+                margin-bottom: 30px;
+                font-size: 16px;
+                line-height: 1.6;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          ${printContent}
+        </body>
+      </html>
+    `);
+    win.document.close();
+    win.focus();
+    win.print();
+    win.close();
+  };
+
   return (
     <div style={{ padding: "30px", color: "#2e3e4f", position: "relative" }}>
       <h2 style={{ fontSize: "26px" }}>🛠️ Pannello Amministratore</h2>
+
+      <button
+        onClick={handlePrint}
+        style={{
+          backgroundColor: "#4a5f44",
+          color: "white",
+          padding: "10px 20px",
+          marginBottom: "20px",
+          border: "none",
+          borderRadius: "8px",
+          fontWeight: "bold",
+          cursor: "pointer"
+        }}
+      >
+        🖨️ Stampa ordini
+      </button>
 
       <h3 style={{ marginTop: "30px" }}>📋 Scelte per camera:</h3>
       <hr />
@@ -157,14 +201,6 @@ export default function AdminPanel() {
         ))}
       </ul>
 
-      <h3 style={{ marginTop: "30px" }}>🍽️ Totale piatti per tipo:</h3>
-      <hr />
-      <ul>
-        {Object.entries(totals).map(([dish, qty], idx) => (
-          <li key={idx}>{`${dish}: ${qty}`}</li>
-        ))}
-      </ul>
-
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <button
           onClick={handleReset}
@@ -180,6 +216,27 @@ export default function AdminPanel() {
         >
           ❌ Reset scelte
         </button>
+      </div>
+
+      {/* Sezione nascosta per la stampa */}
+      <div ref={printRef} style={{ display: "none" }}>
+        <img src="/logo.png" alt="Logo Masseria" />
+        <h2>Ordini per camera</h2>
+        <ul>
+          {allChoices.map(({ room, choices, antipasto }, idx) => (
+            <li key={idx}>
+              <strong>Camera {room}:</strong>{" "}
+              {Object.entries(choices)
+                .map(([dish, qty]) =>
+                  dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
+                )
+                .join(", ")}
+              {" — "}
+              Antipasto di mare:{" "}
+              {antipasto === false ? "❌" : "✅"}
+            </li>
+          ))}
+        </ul>
       </div>
 
       {editIndex !== null && (
@@ -230,7 +287,7 @@ export default function AdminPanel() {
                 onChange={(e) =>
                   setEditData((prev) => ({ ...prev, antipasto: e.target.checked }))
                 }
-              />{" "}
+              />
               <span>{editData.antipasto ? "✅" : "❌"}</span>
             </div>
 
