@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 12/07/2025",
+    title: "Menù del giorno 13/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 12/07/2025",
+    title: "Menu of the Day 13/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 12/07/2025",
+    title: "Tagesmenü 13/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -48,26 +48,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Spaghetti aglio olio e peperoncino in crema di cavolfiore e pane aromatizzato all'acciuga",
-      en: "Spaghetti with garlic, oil and chili in cauliflower cream with anchovy-flavored bread",
-      de: "Spaghetti mit Knoblauch, Öl und Chili in Blumenkohlcreme mit Anchovybrot"
+      it: "Ziti con ragù di carne di involtino e pecorino",
+      en: "Ziti pasta with meat roll ragù and pecorino cheese",
+      de: "Ziti mit Rinderragout vom Involtino und Pecorino"
     },
     {
-      it: "Tubettini di pasta con un brodetto di rana pescatrice",
-      en: "Small pasta tubes in a monkfish broth",
-      de: "Kleine Nudeln in einem Seeteufel-Fischsud"
+      it: "Paccheri agli scampi",
+      en: "Paccheri pasta with scampi",
+      de: "Paccheri mit Scampi"
     }
   ],
   secondCourses: [
     {
-      it: "Salsiccia alla griglia",
-      en: "Grilled sausage",
-      de: "Gegrillte Wurst"
+      it: "Involtino di carne",
+      en: "Meat roll",
+      de: "Fleischröllchen"
     },
     {
-      it: "Spigola al sale",
-      en: "Salt-baked sea bass",
-      de: "Wolfsbarsch in Salzkruste"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried calamari and shrimp",
+      de: "Gemischte frittierte Calamari und Garnelen"
     }
   ]
 };
@@ -98,7 +98,6 @@ export default function MenuForm() {
 
     const choices = {};
 
-    // Salva piatti con label .it nel DB
     [...menuData.firstCourses, ...menuData.secondCourses].forEach((dish) => {
       const label = getLabel(dish);
       const qty = quantities[label];
@@ -115,7 +114,7 @@ export default function MenuForm() {
       await push(ref(db, "scelte"), {
         room,
         choices,
-        noStarter
+        antipasto: !noStarter // salva antipasto: true se non selezionato
       });
       alert("Ordine inviato con successo!");
     } catch (error) {
@@ -296,3 +295,4 @@ export default function MenuForm() {
     </form>
   );
 }
+
