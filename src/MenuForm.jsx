@@ -72,7 +72,6 @@ const menuData = {
   ]
 };
 
-
 export default function MenuForm() {
   const [language, setLanguage] = useState("it");
   const [room, setRoom] = useState("");
@@ -81,12 +80,12 @@ export default function MenuForm() {
   const [noStarter, setNoStarter] = useState(false);
 
   const t = translations[language];
-  const getLabel = (obj) => obj[language];
+  const getLabel = (dish) => dish[language];
 
-  const handleQuantityChange = (dish, value) => {
+  const handleQuantityChange = (dishLabel, value) => {
     setQuantities((prev) => ({
       ...prev,
-      [dish]: parseInt(value) || 0
+      [dishLabel]: parseInt(value) || 0
     }));
   };
 
@@ -99,22 +98,17 @@ export default function MenuForm() {
 
     const choices = {};
 
-    Object.entries(quantities).forEach(([dishLabel, qty]) => {
+    // Salva piatti con label .it nel DB
+    [...menuData.firstCourses, ...menuData.secondCourses].forEach((dish) => {
+      const label = getLabel(dish);
+      const qty = quantities[label];
       if (qty > 0) {
-        const dishInIt = [...menuData.firstCourses, ...menuData.secondCourses].find(
-          (dish) => dish[language] === dishLabel
-        )?.it;
-
-        if (dishInIt) {
-          choices[dishInIt] = qty;
-        } else {
-          choices[dishLabel] = qty;
-        }
+        choices[dish.it] = qty;
       }
     });
 
     if (otherChoice.trim()) {
-      choices["Altro"] = otherChoice.trim();
+      choices[t.otherKey] = otherChoice.trim();
     }
 
     try {
@@ -126,7 +120,7 @@ export default function MenuForm() {
       alert("Ordine inviato con successo!");
     } catch (error) {
       console.error("Errore durante il salvataggio:", error);
-      alert("Si è verificato un errore durante l'invio dell'ordine.");
+      alert("Errore durante l'invio dell'ordine.");
     }
 
     setRoom("");
@@ -213,50 +207,52 @@ export default function MenuForm() {
       <br />
 
       <h3 style={{ color: "#4a5f44" }}>{t.firstCourses}</h3>
-      {menuData.firstCourses.map((dish, idx) => (
-        <div key={idx} style={{ marginBottom: "10px" }}>
-          {getLabel(dish)}:
-          <input
-            type="number"
-            inputMode="numeric"
-            min="0"
-            value={quantities[getLabel(dish)] || ""}
-            onChange={(e) =>
-              handleQuantityChange(getLabel(dish), e.target.value)
-            }
-            style={{
-              width: "60px",
-              marginLeft: "10px",
-              padding: "4px",
-              backgroundColor: "#f1f1f1",
-              color: "#000"
-            }}
-          />
-        </div>
-      ))}
+      {menuData.firstCourses.map((dish, idx) => {
+        const label = getLabel(dish);
+        return (
+          <div key={idx} style={{ marginBottom: "10px" }}>
+            {label}:
+            <input
+              type="number"
+              inputMode="numeric"
+              min="0"
+              value={quantities[label] || ""}
+              onChange={(e) => handleQuantityChange(label, e.target.value)}
+              style={{
+                width: "60px",
+                marginLeft: "10px",
+                padding: "4px",
+                backgroundColor: "#f1f1f1",
+                color: "#000"
+              }}
+            />
+          </div>
+        );
+      })}
 
       <h3 style={{ color: "#4a5f44", marginTop: "20px" }}>{t.secondCourses}</h3>
-      {menuData.secondCourses.map((dish, idx) => (
-        <div key={idx} style={{ marginBottom: "10px" }}>
-          {getLabel(dish)}:
-          <input
-            type="number"
-            inputMode="numeric"
-            min="0"
-            value={quantities[getLabel(dish)] || ""}
-            onChange={(e) =>
-              handleQuantityChange(getLabel(dish), e.target.value)
-            }
-            style={{
-              width: "60px",
-              marginLeft: "10px",
-              padding: "4px",
-              backgroundColor: "#f1f1f1",
-              color: "#000"
-            }}
-          />
-        </div>
-      ))}
+      {menuData.secondCourses.map((dish, idx) => {
+        const label = getLabel(dish);
+        return (
+          <div key={idx} style={{ marginBottom: "10px" }}>
+            {label}:
+            <input
+              type="number"
+              inputMode="numeric"
+              min="0"
+              value={quantities[label] || ""}
+              onChange={(e) => handleQuantityChange(label, e.target.value)}
+              style={{
+                width: "60px",
+                marginLeft: "10px",
+                padding: "4px",
+                backgroundColor: "#f1f1f1",
+                color: "#000"
+              }}
+            />
+          </div>
+        );
+      })}
 
       <br />
 
@@ -300,4 +296,3 @@ export default function MenuForm() {
     </form>
   );
 }
-

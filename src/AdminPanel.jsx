@@ -22,13 +22,12 @@ const allDishes = [
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
-  const [editData, setEditData] = useState({ room: "", choices: {}, antipasto: true });
+  const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
 
   const printRef = useRef();
   const otherKey = "Altro";
 
-  // ✅ Caricamento dati da Firebase
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
     const unsubscribe = onValue(scelteRef, (snapshot) => {
@@ -54,12 +53,20 @@ export default function AdminPanel() {
     }
   };
 
+  const handleDeleteSingle = async (idx) => {
+    const key = entryKeys[idx];
+    const confirm = window.confirm("Eliminare questa scelta?");
+    if (confirm) {
+      await remove(ref(db, `scelte/${key}`));
+    }
+  };
+
   const openEdit = (idx) => {
     const current = allChoices[idx];
     setEditData({
       room: current.room,
       choices: { ...current.choices },
-      antipasto: current.antipasto !== false
+      noStarter: current.noStarter === true
     });
     setEditIndex(idx);
   };
@@ -97,7 +104,7 @@ export default function AdminPanel() {
     const updated = {
       room: editData.room,
       choices: cleanedChoices,
-      antipasto: editData.antipasto
+      noStarter: editData.noStarter
     };
 
     await update(ref(db, `scelte/${key}`), updated);
@@ -190,7 +197,7 @@ export default function AdminPanel() {
       <h3 style={{ marginTop: "30px" }}>📋 Scelte per camera:</h3>
       <hr />
       <ul>
-        {allChoices.map(({ room, choices, antipasto }, idx) => (
+        {allChoices.map(({ room, choices, noStarter }, idx) => (
           <li key={idx} style={{ marginBottom: "10px" }}>
             <strong>Camera {room}:</strong>{" "}
             {Object.entries(choices || {})
@@ -200,7 +207,7 @@ export default function AdminPanel() {
               .join(", ")}
             {" — "}
             Antipasto di mare:{" "}
-            {antipasto === false ? <span style={{ color: "red" }}>❌</span> : <span style={{ color: "green" }}>✅</span>}
+            {noStarter ? <span style={{ color: "red" }}>❌</span> : <span style={{ color: "green" }}>✅</span>}
             <button
               onClick={() => openEdit(idx)}
               style={{
@@ -214,6 +221,21 @@ export default function AdminPanel() {
               }}
             >
               Modifica
+            </button>
+            <button
+              onClick={() => handleDeleteSingle(idx)}
+              style={{
+                marginLeft: "10px",
+                padding: "4px 10px",
+                fontSize: "12px",
+                backgroundColor: "#f2dede",
+                border: "1px solid #e0b4b4",
+                borderRadius: "6px",
+                cursor: "pointer",
+                color: "#a94442"
+              }}
+            >
+              🗑️ Elimina
             </button>
           </li>
         ))}
@@ -249,7 +271,7 @@ export default function AdminPanel() {
         <img src="/logo.png" alt="Logo Masseria" />
         <h2>Ordini per camera</h2>
         <ul>
-          {allChoices.map(({ room, choices, antipasto }, idx) => (
+          {allChoices.map(({ room, choices, noStarter }, idx) => (
             <li key={idx}>
               <strong>Camera {room}:</strong>{" "}
               {Object.entries(choices || {})
@@ -258,7 +280,7 @@ export default function AdminPanel() {
                 )
                 .join(", ")}
               {" — "}
-              Antipasto di mare: {antipasto === false ? "❌" : "✅"}
+              Antipasto di mare: {noStarter ? "❌" : "✅"}
             </li>
           ))}
         </ul>
@@ -309,12 +331,15 @@ export default function AdminPanel() {
               Antipasto di mare:&nbsp;
               <input
                 type="checkbox"
-                checked={editData.antipasto}
+                checked={!editData.noStarter}
                 onChange={(e) =>
-                  setEditData((prev) => ({ ...prev, antipasto: e.target.checked }))
+                  setEditData((prev) => ({
+                    ...prev,
+                    noStarter: !e.target.checked
+                  }))
                 }
               />
-              <span>{editData.antipasto ? "✅" : "❌"}</span>
+              <span>{!editData.noStarter ? "✅" : "❌"}</span>
             </div>
 
             <div style={{ marginTop: "20px" }}>
