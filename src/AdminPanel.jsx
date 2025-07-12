@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Nuovo menu del giorno
+// ✅ Menu aggiornato
 const menuData = {
   firstCourses: [
     { it: "Spaghetti aglio olio e peperoncino in crema di cavolfiore e pane aromatizzato all'acciuga" },
@@ -28,6 +28,7 @@ export default function AdminPanel() {
   const printRef = useRef();
   const otherKey = "Altro";
 
+  // ✅ Caricamento dati da Firebase
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
     const unsubscribe = onValue(scelteRef, (snapshot) => {
@@ -87,7 +88,7 @@ export default function AdminPanel() {
     const key = entryKeys[editIndex];
 
     const cleanedChoices = {};
-    Object.entries(editData.choices).forEach(([dish, qty]) => {
+    Object.entries(editData.choices || {}).forEach(([dish, qty]) => {
       if ((typeof qty === "number" && qty > 0) || (dish === otherKey && qty.trim())) {
         cleanedChoices[dish] = qty;
       }
@@ -158,7 +159,7 @@ export default function AdminPanel() {
   };
 
   const totals = allChoices.reduce((acc, entry) => {
-    Object.entries(entry.choices).forEach(([dish, qty]) => {
+    Object.entries(entry.choices || {}).forEach(([dish, qty]) => {
       if (dish !== otherKey) {
         acc[dish] = (acc[dish] || 0) + qty;
       }
@@ -192,7 +193,7 @@ export default function AdminPanel() {
         {allChoices.map(({ room, choices, antipasto }, idx) => (
           <li key={idx} style={{ marginBottom: "10px" }}>
             <strong>Camera {room}:</strong>{" "}
-            {Object.entries(choices)
+            {Object.entries(choices || {})
               .map(([dish, qty]) =>
                 dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
               )
@@ -243,6 +244,7 @@ export default function AdminPanel() {
         </button>
       </div>
 
+      {/* ✅ Sezione per stampa */}
       <div ref={printRef} style={{ display: "none" }}>
         <img src="/logo.png" alt="Logo Masseria" />
         <h2>Ordini per camera</h2>
@@ -250,7 +252,7 @@ export default function AdminPanel() {
           {allChoices.map(({ room, choices, antipasto }, idx) => (
             <li key={idx}>
               <strong>Camera {room}:</strong>{" "}
-              {Object.entries(choices)
+              {Object.entries(choices || {})
                 .map(([dish, qty]) =>
                   dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
                 )
@@ -262,6 +264,7 @@ export default function AdminPanel() {
         </ul>
       </div>
 
+      {/* ✅ Popup modifica */}
       {editIndex !== null && (
         <div
           style={{
