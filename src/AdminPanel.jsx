@@ -159,12 +159,29 @@ export default function AdminPanel() {
     win.document.close();
   };
 
-  const totals = allChoices.reduce((acc, entry) => {
-    Object.entries(entry.choices || {}).forEach(([dish, qty]) => {
-      if (dish !== otherKey) {
-        acc[dish] = (acc[dish] || 0) + qty;
-      }
+  // 🔧 Ordina i piatti nel report secondo il menu
+  const getOrderedChoicesString = (choices) => {
+    const entries = [];
+
+    menuData.firstCourses.forEach(d => {
+      const qty = choices[d.it];
+      if (qty) entries.push(`${d.it}: ${qty}`);
     });
+
+    menuData.secondCourses.forEach(d => {
+      const qty = choices[d.it];
+      if (qty) entries.push(`${d.it}: ${qty}`);
+    });
+
+    if (choices[otherKey]) {
+      entries.push(`${otherKey}: ${choices[otherKey]}`);
+    }
+
+    return entries.join(", ");
+  };
+
+  const totals = allDishes.reduce((acc, dish) => {
+    acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish] || 0), 0);
     return acc;
   }, {});
 
@@ -182,11 +199,7 @@ export default function AdminPanel() {
         {allChoices.map(({ room, choices, noStarter }, idx) => (
           <li key={idx}>
             <strong>Camera {room}:</strong>{" "}
-            {Object.entries(choices || {})
-              .map(([dish, qty]) =>
-                dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
-              )
-              .join(", ")}
+            {getOrderedChoicesString(choices || {})}
             {" — "}
             Antipasto di mare: {noStarter ? <span style={{ color: "red" }}>❌</span> : <span style={{ color: "green" }}>✅</span>}
             <button onClick={() => openEdit(idx)} style={{ marginLeft: "10px" }}>Modifica</button>
@@ -198,8 +211,8 @@ export default function AdminPanel() {
       <h3>🍽️ Totale piatti per tipo:</h3>
       <hr />
       <ul>
-        {Object.entries(totals).map(([dish, qty], idx) => (
-          <li key={idx}>{`${dish}: ${qty}`}</li>
+        {allDishes.map((dish, idx) => (
+          <li key={idx}>{`${dish}: ${totals[dish]}`}</li>
         ))}
       </ul>
 
@@ -217,11 +230,7 @@ export default function AdminPanel() {
           {allChoices.map(({ room, choices, noStarter }, idx) => (
             <li key={idx}>
               <strong>Camera {room}:</strong>{" "}
-              {Object.entries(choices || {})
-                .map(([dish, qty]) =>
-                  dish === otherKey ? `${otherKey}: ${qty}` : `${dish}: ${qty}`
-                )
-                .join(", ")}
+              {getOrderedChoicesString(choices || {})}
               {" — "}
               Antipasto di mare: {noStarter ? "❌" : "✅"}
             </li>
