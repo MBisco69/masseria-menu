@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 12/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Ziti con ragù di carne di involtino e pecorino" },
-    { it: "Paccheri agli scampi" }
+    { it: "Troccoli con sugo di seppia ripiena e cacioricotta" },
+    { it: "Orecchiette con cime di rapa" }
   ],
   secondCourses: [
-    { it: "Involtino di carne" },
-    { it: "Frittura mista di calamari e gamberi" }
+    { it: "Seppia ripiena " },
+    { it: "Involtini di capocollo di maiale con caciocavallo" }
   ]
 };
 

@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 13/07/2025",
+    title: "Menù del giorno 14/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 13/07/2025",
+    title: "Menu of the Day 14/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 13/07/2025",
+    title: "Tagesmenü 14/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -48,26 +48,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Ziti con ragù di carne di involtino e pecorino",
-      en: "Ziti pasta with meat roll ragù and pecorino cheese",
-      de: "Ziti mit Rinderragout vom Involtino und Pecorino"
+      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
+      en: "Troccoli pasta with stuffed cuttlefish sauce and cacioricotta cheese",
+      de: "Troccoli mit Sauce aus gefülltem Tintenfisch und Cacioricotta-Käse"
     },
     {
-      it: "Paccheri agli scampi",
-      en: "Paccheri pasta with scampi",
-      de: "Paccheri mit Scampi"
+      it: "Orecchiette con cime di rapa",
+      en: "Orecchiette pasta with turnip tops",
+      de: "Orecchiette mit Stängelkohl (Cime di Rapa)"
     }
   ],
   secondCourses: [
     {
-      it: "Involtino di carne",
-      en: "Meat roll",
-      de: "Fleischröllchen"
+      it: "Seppia ripiena",
+      en: "Stuffed cuttlefish",
+      de: "Gefüllter Tintenfisch"
     },
     {
-      it: "Frittura mista di calamari e gamberi",
-      en: "Mixed fried calamari and shrimp",
-      de: "Gemischte frittierte Calamari und Garnelen"
+      it: "Involtini di capocollo di maiale con caciocavallo",
+      en: "Rolled pork neck with caciocavallo cheese",
+      de: "Schweinenackenröllchen mit Caciocavallo-Käse"
     }
   ]
 };
