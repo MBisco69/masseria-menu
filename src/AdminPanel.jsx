@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 12/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Troccoli con sugo di seppia ripiena e cacioricotta" },
-    { it: "Orecchiette con cime di rapa" }
+    { it: "Chitarrine ai frutti di mare" },
+    { it: "Pasta e fagioli" }
   ],
   secondCourses: [
-    { it: "Seppia ripiena " },
-    { it: "Involtini di capocollo di maiale con caciocavallo" }
+    { it: "Coniglio alla cacciatora " },
+    { it: "Pesce spada in salmì" }
   ]
 };
 

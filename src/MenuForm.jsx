@@ -48,26 +48,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
-      en: "Troccoli pasta with stuffed cuttlefish sauce and cacioricotta cheese",
-      de: "Troccoli mit Sauce aus gefülltem Tintenfisch und Cacioricotta-Käse"
+      it: "Chitarrine ai frutti di mare",
+      en: "Chitarrine pasta with seafood",
+      de: "Chitarrine mit Meeresfrüchten"
     },
     {
-      it: "Orecchiette con cime di rapa",
-      en: "Orecchiette pasta with turnip tops",
-      de: "Orecchiette mit Stängelkohl (Cime di Rapa)"
+      it: "Pasta e fagioli",
+      en: "Pasta and beans (traditional Italian soup)",
+      de: "Pasta mit Bohnen (italienische Bohnensuppe)"
     }
   ],
   secondCourses: [
     {
-      it: "Seppia ripiena",
-      en: "Stuffed cuttlefish",
-      de: "Gefüllter Tintenfisch"
+      it: "Coniglio alla cacciatora",
+      en: "Hunter-style rabbit (rabbit alla cacciatora)",
+      de: "Kaninchen nach Jägerart (alla cacciatora)"
     },
     {
-      it: "Involtini di capocollo di maiale con caciocavallo",
-      en: "Rolled pork neck with caciocavallo cheese",
-      de: "Schweinenackenröllchen mit Caciocavallo-Käse"
+      it: "Pesce spada in salmì",
+      en: "Marinated swordfish (swordfish in salmì sauce)",
+      de: "Schwertfisch in Salmì-Sauce (mariniert in Wein und Kräutern)"
     }
   ]
 };
