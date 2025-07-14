@@ -9,14 +9,15 @@ const menuData = {
     { it: "Pasta e fagioli" }
   ],
   secondCourses: [
-    { it: "Coniglio alla cacciatora " },
+    { it: "Coniglio alla cacciatora" }, // 🔧 Rimosso spazio finale
     { it: "Pesce spada in salmì" }
   ]
 };
 
+// 🔧 Usa .trim() per uniformare i nomi dei piatti
 const allDishes = [
-  ...menuData.firstCourses.map(d => d.it),
-  ...menuData.secondCourses.map(d => d.it)
+  ...menuData.firstCourses.map(d => d.it.trim()),
+  ...menuData.secondCourses.map(d => d.it.trim())
 ];
 
 export default function AdminPanel() {
@@ -70,11 +71,12 @@ export default function AdminPanel() {
   };
 
   const handleEditChange = (dish, value) => {
+    const trimmedDish = dish.trim();
     setEditData((prev) => ({
       ...prev,
       choices: {
         ...prev.choices,
-        [dish]: parseInt(value) || 0
+        [trimmedDish]: parseInt(value) || 0
       }
     }));
   };
@@ -94,8 +96,9 @@ export default function AdminPanel() {
     const cleanedChoices = {};
 
     Object.entries(editData.choices || {}).forEach(([dish, qty]) => {
-      if ((typeof qty === "number" && qty > 0) || (dish === otherKey && qty.trim())) {
-        cleanedChoices[dish] = qty;
+      const trimmedDish = dish.trim();
+      if ((typeof qty === "number" && qty > 0) || (trimmedDish === otherKey && qty.trim())) {
+        cleanedChoices[trimmedDish] = qty;
       }
     });
 
@@ -159,18 +162,19 @@ export default function AdminPanel() {
     win.document.close();
   };
 
-  // 🔧 Ordina i piatti nel report secondo il menu
   const getOrderedChoicesString = (choices) => {
     const entries = [];
 
     menuData.firstCourses.forEach(d => {
-      const qty = choices[d.it];
-      if (qty) entries.push(`${d.it}: ${qty}`);
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`${name}: ${qty}`);
     });
 
     menuData.secondCourses.forEach(d => {
-      const qty = choices[d.it];
-      if (qty) entries.push(`${d.it}: ${qty}`);
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`${name}: ${qty}`);
     });
 
     if (choices[otherKey]) {
@@ -181,7 +185,7 @@ export default function AdminPanel() {
   };
 
   const totals = allDishes.reduce((acc, dish) => {
-    acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish] || 0), 0);
+    acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
     return acc;
   }, {});
 
