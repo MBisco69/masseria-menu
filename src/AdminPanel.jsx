@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 12/07/2025
+// ✅ Menu aggiornato 16/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Chitarrine ai frutti di mare" },
-    { it: "Pasta e fagioli" }
+    { it: "Spaghetti con i lupini di mare (vongoline)" },
+    { it: "Orecchiette con cicorietta, olive nere e pane croccante" }
   ],
   secondCourses: [
-    { it: "Coniglio alla cacciatora" }, // 🔧 Rimosso spazio finale
-    { it: "Pesce spada in salmì" }
+    { it: "Filetto di branzino con patate e pomodorini" },
+    { it: "Pollo alla diavola" }
   ]
 };
 

@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 15/07/2025",
+    title: "Menù del giorno 16/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 15/07/2025",
+    title: "Menu of the Day 16/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 15/07/2025",
+    title: "Tagesmenü 16/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,29 +45,30 @@ const translations = {
   }
 };
 
+// 🔧 Nuovo menu del 15/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Chitarrine ai frutti di mare",
-      en: "Chitarrine pasta with seafood",
-      de: "Chitarrine mit Meeresfrüchten"
+      it: "Spaghetti con i lupini di mare (vongoline)",
+      en: "Spaghetti with sea lupins (baby clams)",
+      de: "Spaghetti mit Meeresschnecken (Venusmuscheln)"
     },
     {
-      it: "Pasta e fagioli",
-      en: "Pasta and beans (traditional Italian soup)",
-      de: "Pasta mit Bohnen (italienische Bohnensuppe)"
+      it: "Orecchiette con cicorietta, olive nere e pane croccante",
+      en: "Orecchiette with wild chicory, black olives and crispy bread",
+      de: "Orecchiette mit wilder Zichorie, schwarzen Oliven und knusprigem Brot"
     }
   ],
   secondCourses: [
     {
-      it: "Coniglio alla cacciatora",
-      en: "Hunter-style rabbit (rabbit alla cacciatora)",
-      de: "Kaninchen nach Jägerart (alla cacciatora)"
+      it: "Filetto di branzino con patate e pomodorini",
+      en: "Sea bass fillet with potatoes and cherry tomatoes",
+      de: "Wolfsbarschfilet mit Kartoffeln und Kirschtomaten"
     },
     {
-      it: "Pesce spada in salmì",
-      en: "Marinated swordfish (swordfish in salmì sauce)",
-      de: "Schwertfisch in Salmì-Sauce (mariniert in Wein und Kräutern)"
+      it: "Pollo alla diavola",
+      en: "Spicy grilled chicken (Pollo alla diavola)",
+      de: "Scharfes Grillhähnchen (Pollo alla diavola)"
     }
   ]
 };
@@ -295,4 +296,3 @@ export default function MenuForm() {
     </form>
   );
 }
-
