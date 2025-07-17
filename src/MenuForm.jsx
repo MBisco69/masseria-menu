@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 16/07/2025",
+    title: "Menù del giorno 18/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 16/07/2025",
+    title: "Menu of the Day 18/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 16/07/2025",
+    title: "Tagesmenü 18/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// 🔧 Nuovo menu del 15/07/2025
+// ✅ Menu aggiornato 18/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Spaghetti con i lupini di mare (vongoline)",
-      en: "Spaghetti with sea lupins (baby clams)",
-      de: "Spaghetti mit Meeresschnecken (Venusmuscheln)"
+      it: "Spaghettoni con ragù di verdure e cacioricotta",
+      en: "Thick spaghetti with vegetable ragout and cacioricotta cheese",
+      de: "Spaghettoni mit Gemüseragout und Cacioricotta-Käse"
     },
     {
-      it: "Orecchiette con cicorietta, olive nere e pane croccante",
-      en: "Orecchiette with wild chicory, black olives and crispy bread",
-      de: "Orecchiette mit wilder Zichorie, schwarzen Oliven und knusprigem Brot"
+      it: "Gnocchetti con cozze e porcini",
+      en: "Gnocchetti with mussels and porcini mushrooms",
+      de: "Gnocchetti mit Miesmuscheln und Steinpilzen"
     }
   ],
   secondCourses: [
     {
-      it: "Filetto di branzino con patate e pomodorini",
-      en: "Sea bass fillet with potatoes and cherry tomatoes",
-      de: "Wolfsbarschfilet mit Kartoffeln und Kirschtomaten"
+      it: "Straccetti di vitello con pomodorini, rucola e grana",
+      en: "Veal strips with cherry tomatoes, arugula and Grana cheese",
+      de: "Kalbsstreifen mit Kirschtomaten, Rucola und Grana-Käse"
     },
     {
-      it: "Pollo alla diavola",
-      en: "Spicy grilled chicken (Pollo alla diavola)",
-      de: "Scharfes Grillhähnchen (Pollo alla diavola)"
+      it: "Sgombro aperto al forno",
+      en: "Oven-baked open mackerel",
+      de: "Ofengebackener aufgeschnittener Makrele"
     }
   ]
 };
