@@ -5,7 +5,7 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 18/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Pasta alla crodaiola (mozzarella, pomodoro, basilico)" },
+    { it: "Pasta alla crudaiola (mozzarella, pomodoro, basilico)" },
     { it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone" }
   ],
   secondCourses: [

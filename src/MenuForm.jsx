@@ -49,9 +49,9 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Pasta alla crodaiola (mozzarella, pomodoro, basilico)",
-      en: "Pasta alla crodaiola (mozzarella, tomato, basil)",
-      de: "Pasta alla Crodaiola (Mozzarella, Tomaten, Basilikum)"
+      it: "Pasta alla crudaiola (mozzarella, pomodoro, basilico)",
+      en: "Pasta alla crudaiola (mozzarella, tomato, basil)",
+      de: "Pasta alla crudaiola (Mozzarella, Tomaten, Basilikum)"
     },
     {
       it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone",
