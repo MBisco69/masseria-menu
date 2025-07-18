@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 18/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Spaghettoni con ragù di verdure e cacioricotta" },
-    { it: "Gnocchetti con cozze e porcini" }
+    { it: "Pasta alla crodaiola (mozzarella, pomodoro, basilico)" },
+    { it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone" }
   ],
   secondCourses: [
-    { it: "Straccetti di vitello con pomodorini, rucola e grana" },
-    { it: "Sgombro aperto al forno" }
+    { it: "Roastbeef" },
+    { it: "Ombrina (pesce) gratinata" }
   ]
 };
 

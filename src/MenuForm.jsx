@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 18/07/2025",
+    title: "Menù del giorno 19/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 18/07/2025",
+    title: "Menu of the Day 19/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 18/07/2025",
+    title: "Tagesmenü 19/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -49,26 +49,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Spaghettoni con ragù di verdure e cacioricotta",
-      en: "Thick spaghetti with vegetable ragout and cacioricotta cheese",
-      de: "Spaghettoni mit Gemüseragout und Cacioricotta-Käse"
+      it: "Pasta alla crodaiola (mozzarella, pomodoro, basilico)",
+      en: "Pasta alla crodaiola (mozzarella, tomato, basil)",
+      de: "Pasta alla Crodaiola (Mozzarella, Tomaten, Basilikum)"
     },
     {
-      it: "Gnocchetti con cozze e porcini",
-      en: "Gnocchetti with mussels and porcini mushrooms",
-      de: "Gnocchetti mit Miesmuscheln und Steinpilzen"
+      it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone",
+      en: "Chitarrina pasta with zucchini cream, shrimp, stracciatella and lemon zest",
+      de: "Chitarrina mit Zucchinicreme, Garnelen, Stracciatella und Zitronenduft"
     }
   ],
   secondCourses: [
     {
-      it: "Straccetti di vitello con pomodorini, rucola e grana",
-      en: "Veal strips with cherry tomatoes, arugula and Grana cheese",
-      de: "Kalbsstreifen mit Kirschtomaten, Rucola und Grana-Käse"
+      it: "Roastbeef",
+      en: "Roast beef",
+      de: "Roastbeef"
     },
     {
-      it: "Sgombro aperto al forno",
-      en: "Oven-baked open mackerel",
-      de: "Ofengebackener aufgeschnittener Makrele"
+      it: "Ombrina (pesce) gratinata",
+      en: "Gratinated croaker fish",
+      de: "Gratinierter Umbrina-Fisch"
     }
   ]
 };
@@ -115,7 +115,7 @@ export default function MenuForm() {
       await push(ref(db, "scelte"), {
         room,
         choices,
-        antipasto: !noStarter // salva antipasto: true se non selezionato
+        antipasto: !noStarter
       });
       alert("Ordine inviato con successo!");
     } catch (error) {
