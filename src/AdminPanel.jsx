@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 18/07/2025
+// ✅ Menu aggiornato 19/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Pasta alla crudaiola (mozzarella, pomodoro, basilico)" },
-    { it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone" }
+    { it: "Crepes salate ripiene di formaggio e tartufo" },
+    { it: "Risotto ai frutti di mare" }
   ],
   secondCourses: [
-    { it: "Roastbeef" },
-    { it: "Ombrina (pesce) gratinata" }
+    { it: "Frittura mista di calamari e gamberi" },
+    { it: "Medaglioni di lonza agli agrumi" }
   ]
 };
 

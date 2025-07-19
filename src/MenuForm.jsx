@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 18/07/2025
+// ✅ Menu aggiornato 19/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Pasta alla crudaiola (mozzarella, pomodoro, basilico)",
-      en: "Pasta alla crudaiola (mozzarella, tomato, basil)",
-      de: "Pasta alla crudaiola (Mozzarella, Tomaten, Basilikum)"
+      it: "Crepes salate ripiene di formaggio e tartufo",
+      en: "Savory crepes stuffed with cheese and truffle",
+      de: "Herzhafte Crêpes gefüllt mit Käse und Trüffel"
     },
     {
-      it: "Chitarrina in crema di zucchine con gamberi, stracciatella e profumo di limone",
-      en: "Chitarrina pasta with zucchini cream, shrimp, stracciatella and lemon zest",
-      de: "Chitarrina mit Zucchinicreme, Garnelen, Stracciatella und Zitronenduft"
+      it: "Risotto ai frutti di mare",
+      en: "Seafood risotto",
+      de: "Meeresfrüchte-Risotto"
     }
   ],
   secondCourses: [
     {
-      it: "Roastbeef",
-      en: "Roast beef",
-      de: "Roastbeef"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried calamari and shrimp",
+      de: "Gemischte frittierte Tintenfische und Garnelen"
     },
     {
-      it: "Ombrina (pesce) gratinata",
-      en: "Gratinated croaker fish",
-      de: "Gratinierter Umbrina-Fisch"
+      it: "Medaglioni di lonza agli agrumi",
+      en: "Pork loin medallions with citrus",
+      de: "Schweinelendchen an Zitrusfrüchten"
     }
   ]
 };
