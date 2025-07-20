@@ -49,29 +49,30 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Crepes salate ripiene di formaggio e tartufo",
-      en: "Savory crepes stuffed with cheese and truffle",
-      de: "Herzhafte Crêpes gefüllt mit Käse und Trüffel"
+      it: "Linguine al nero di seppia",
+      en: "Linguine with cuttlefish ink",
+      de: "Linguine mit Tintenfischtinte"
     },
     {
-      it: "Risotto ai frutti di mare",
-      en: "Seafood risotto",
-      de: "Meeresfrüchte-Risotto"
+      it: "Spaghetti con datterino giallo, in crema di mozzarella con basilico e pinoli",
+      en: "Spaghetti with yellow cherry tomatoes, mozzarella cream, basil and pine nuts",
+      de: "Spaghetti mit gelben Datteltomaten, Mozzarellacreme, Basilikum und Pinienkernen"
     }
   ],
   secondCourses: [
     {
-      it: "Frittura mista di calamari e gamberi",
-      en: "Mixed fried calamari and shrimp",
-      de: "Gemischte frittierte Tintenfische und Garnelen"
+      it: "Sogliola alla mugnaia",
+      en: "Sole fish meunière style",
+      de: "Seezungenfilet nach Müllerinart"
     },
     {
-      it: "Medaglioni di lonza agli agrumi",
-      en: "Pork loin medallions with citrus",
-      de: "Schweinelendchen an Zitrusfrüchten"
+      it: "Spiedino di carne alla griglia",
+      en: "Grilled meat skewer",
+      de: "Gegrillter Fleischspieß"
     }
   ]
 };
+
 
 export default function MenuForm() {
   const [language, setLanguage] = useState("it");
