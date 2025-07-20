@@ -14,10 +14,9 @@ const menuData = {
   ]
 };
 
-// 🔧 Usa .trim() per uniformare i nomi dei piatti
 const allDishes = [
-  ...menuData.firstCourses.map((d) => d.it.trim()),
-  ...menuData.secondCourses.map((d) => d.it.trim())
+  ...menuData.firstCourses.map(d => d.it.trim()),
+  ...menuData.secondCourses.map(d => d.it.trim())
 ];
 
 export default function AdminPanel() {
@@ -25,9 +24,8 @@ export default function AdminPanel() {
   const [editIndex, setEditIndex] = useState(null);
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
-  const [activeTab, setActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
 
-  const printRef = useRef();
   const otherKey = "Altro";
 
   useEffect(() => {
@@ -112,6 +110,74 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
+  const handlePrintSingle = (room, choices, noStarter) => {
+    const printWindow = window.open("", "_blank");
+    const logoUrl = "/logo.png";
+    const entries = [];
+
+    menuData.firstCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    });
+
+    menuData.secondCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    });
+
+    if (choices[otherKey]) {
+      entries.push(`<li>${otherKey}: ${choices[otherKey]}</li>`);
+    }
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Comanda Camera ${room}</title>
+          <style>
+            body {
+              font-family: monospace;
+              font-size: 16px;
+              padding: 10px;
+              margin: 0;
+              text-align: center;
+            }
+            img {
+              width: 150px;
+              margin-bottom: 10px;
+            }
+            ul {
+              padding: 0;
+              list-style: none;
+              text-align: left;
+            }
+            li {
+              margin: 6px 0;
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${logoUrl}" alt="Logo" />
+          <h2>Camera ${room}</h2>
+          <ul>
+            ${entries.join("\n")}
+          </ul>
+          <p>Antipasto di mare: ${noStarter ? "❌" : "✅"}</p>
+          <script>
+            window.onload = function () {
+              window.print();
+              window.onafterprint = function () {
+                window.close();
+              };
+            };
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+
   const totals = allDishes.reduce((acc, dish) => {
     acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
     return acc;
@@ -121,16 +187,18 @@ export default function AdminPanel() {
     <div style={{ padding: "30px", color: "#2e3e4f", position: "relative" }}>
       <h2>🛠️ Pannello Amministratore</h2>
 
-      <h3>📋 Scelte per camera:</h3>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "20px" }}>
+      <div style={{ marginBottom: "20px" }}>
         {allChoices.map((entry, idx) => (
           <button
             key={idx}
             onClick={() => setActiveTab(idx)}
             style={{
-              padding: "10px 15px",
+              marginRight: "8px",
+              marginBottom: "8px",
+              padding: "8px 16px",
               backgroundColor: activeTab === idx ? "#4a5f44" : "#ccc",
-              color: activeTab === idx ? "#fff" : "#000",
+              color: activeTab === idx ? "white" : "black",
+              border: "none",
               borderRadius: "6px",
               cursor: "pointer"
             }}
@@ -140,21 +208,25 @@ export default function AdminPanel() {
         ))}
       </div>
 
-      {activeTab !== null && (
-        <div style={{ border: "1px solid #ccc", padding: "20px", borderRadius: "10px", backgroundColor: "#f7f7f7" }}>
-          <h4>Comanda Camera {allChoices[activeTab].room}</h4>
+      {allChoices[activeTab] && (
+        <div style={{ border: "1px solid #ddd", padding: "20px", borderRadius: "12px" }}>
+          <h3>📋 Camera {allChoices[activeTab].room}</h3>
           <p>
-            {Object.entries(allChoices[activeTab].choices || {}).map(([dish, qty], i) => (
-              <div key={i}>{dish.trim()}: {qty}</div>
-            ))}
+            <strong>Antipasto di mare:</strong>{" "}
+            {allChoices[activeTab].noStarter ? <span style={{ color: "red" }}>❌</span> : <span style={{ color: "green" }}>✅</span>}
           </p>
-          <p>Antipasto di mare: {allChoices[activeTab].noStarter ? "❌" : "✅"}</p>
+          <ul>
+            {Object.entries(allChoices[activeTab].choices || {}).map(([dish, qty], i) => (
+              <li key={i}>{`${dish}: ${qty}`}</li>
+            ))}
+          </ul>
           <button onClick={() => openEdit(activeTab)} style={{ marginRight: "10px" }}>Modifica</button>
-          <button onClick={() => handleDeleteSingle(activeTab)} style={{ color: "red" }}>🗑️ Elimina</button>
+          <button onClick={() => handleDeleteSingle(activeTab)} style={{ color: "red", marginRight: "10px" }}>🗑️ Elimina</button>
+          <button onClick={() => handlePrintSingle(allChoices[activeTab].room, allChoices[activeTab].choices, allChoices[activeTab].noStarter)}>🖨️ Stampa comanda</button>
         </div>
       )}
 
-      <h3 style={{ marginTop: "40px" }}>🍽️ Totale piatti per tipo:</h3>
+      <h3 style={{ marginTop: "30px" }}>🍽️ Totale piatti per tipo:</h3>
       <hr />
       <ul>
         {allDishes.map((dish, idx) => (
@@ -163,15 +235,11 @@ export default function AdminPanel() {
       </ul>
 
       <div style={{ textAlign: "center", marginTop: "30px" }}>
-        <button
-          onClick={handleReset}
-          style={{ backgroundColor: "#a94444", color: "white", padding: "10px 20px", borderRadius: "8px", cursor: "pointer" }}
-        >
+        <button onClick={handleReset} style={{ backgroundColor: "#a94444", color: "white", padding: "10px 20px", borderRadius: "8px", cursor: "pointer" }}>
           ❌ Reset scelte
         </button>
       </div>
 
-      {/* ✅ POPUP DI MODIFICA */}
       {editIndex !== null && (
         <div style={{
           position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
@@ -222,16 +290,10 @@ export default function AdminPanel() {
             </div>
 
             <div style={{ marginTop: "30px", textAlign: "right" }}>
-              <button
-                onClick={handleSaveEdit}
-                style={{ marginRight: "10px", backgroundColor: "#4a5f44", color: "#fff", padding: "10px", borderRadius: "6px" }}
-              >
+              <button onClick={handleSaveEdit} style={{ marginRight: "10px", backgroundColor: "#4a5f44", color: "#fff", padding: "10px", borderRadius: "6px" }}>
                 Salva
               </button>
-              <button
-                onClick={() => setEditIndex(null)}
-                style={{ backgroundColor: "#aaa", color: "#fff", padding: "10px", borderRadius: "6px" }}
-              >
+              <button onClick={() => setEditIndex(null)} style={{ backgroundColor: "#aaa", color: "#fff", padding: "10px", borderRadius: "6px" }}>
                 Annulla
               </button>
             </div>
