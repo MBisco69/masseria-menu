@@ -16,8 +16,8 @@ const menuData = {
 
 // 🔧 Usa .trim() per uniformare i nomi dei piatti
 const allDishes = [
-  ...menuData.firstCourses.map(d => d.it.trim()),
-  ...menuData.secondCourses.map(d => d.it.trim())
+  ...menuData.firstCourses.map((d) => d.it.trim()),
+  ...menuData.secondCourses.map((d) => d.it.trim())
 ];
 
 export default function AdminPanel() {
@@ -25,6 +25,7 @@ export default function AdminPanel() {
   const [editIndex, setEditIndex] = useState(null);
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
+  const [activeTab, setActiveTab] = useState(null);
 
   const printRef = useRef();
   const otherKey = "Altro";
@@ -111,79 +112,6 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
-  const handlePrint = () => {
-    const printContent = printRef.current.innerHTML;
-    const win = window.open("", "_blank");
-    win.document.write(`
-      <html>
-        <head>
-          <title>Stampa Ordini</title>
-          <style>
-            @media print {
-              body {
-                font-family: Arial, sans-serif;
-                padding: 40px;
-                margin: 0;
-              }
-              img {
-                display: block;
-                margin: 0 auto 30px auto;
-                max-width: 150px;
-              }
-              h2 {
-                text-align: center;
-                color: #4a5f44;
-                margin-bottom: 40px;
-              }
-              ul {
-                list-style-type: none;
-                padding: 0;
-              }
-              li {
-                margin-bottom: 30px;
-                font-size: 16px;
-              }
-            }
-          </style>
-        </head>
-        <body>
-          ${printContent}
-          <script>
-            window.onload = function() {
-              window.print();
-              window.onafterprint = function() {
-                window.close();
-              };
-            };
-          </script>
-        </body>
-      </html>
-    `);
-    win.document.close();
-  };
-
-  const getOrderedChoicesString = (choices) => {
-    const entries = [];
-
-    menuData.firstCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`${name}: ${qty}`);
-    });
-
-    menuData.secondCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`${name}: ${qty}`);
-    });
-
-    if (choices[otherKey]) {
-      entries.push(`${otherKey}: ${choices[otherKey]}`);
-    }
-
-    return entries.join(", ");
-  };
-
   const totals = allDishes.reduce((acc, dish) => {
     acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
     return acc;
@@ -193,26 +121,40 @@ export default function AdminPanel() {
     <div style={{ padding: "30px", color: "#2e3e4f", position: "relative" }}>
       <h2>🛠️ Pannello Amministratore</h2>
 
-      <button onClick={handlePrint} style={{ backgroundColor: "#4a5f44", color: "white", padding: "10px 20px", borderRadius: "8px", marginBottom: "20px", cursor: "pointer" }}>
-        🖨️ Stampa ordini
-      </button>
-
       <h3>📋 Scelte per camera:</h3>
-      <hr />
-      <ul>
-        {allChoices.map(({ room, choices, noStarter }, idx) => (
-          <li key={idx}>
-            <strong>Camera {room}:</strong>{" "}
-            {getOrderedChoicesString(choices || {})}
-            {" — "}
-            Antipasto di mare: {noStarter ? <span style={{ color: "red" }}>❌</span> : <span style={{ color: "green" }}>✅</span>}
-            <button onClick={() => openEdit(idx)} style={{ marginLeft: "10px" }}>Modifica</button>
-            <button onClick={() => handleDeleteSingle(idx)} style={{ marginLeft: "10px", color: "red" }}>🗑️ Elimina</button>
-          </li>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "20px" }}>
+        {allChoices.map((entry, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveTab(idx)}
+            style={{
+              padding: "10px 15px",
+              backgroundColor: activeTab === idx ? "#4a5f44" : "#ccc",
+              color: activeTab === idx ? "#fff" : "#000",
+              borderRadius: "6px",
+              cursor: "pointer"
+            }}
+          >
+            Camera {entry.room}
+          </button>
         ))}
-      </ul>
+      </div>
 
-      <h3>🍽️ Totale piatti per tipo:</h3>
+      {activeTab !== null && (
+        <div style={{ border: "1px solid #ccc", padding: "20px", borderRadius: "10px", backgroundColor: "#f7f7f7" }}>
+          <h4>Comanda Camera {allChoices[activeTab].room}</h4>
+          <p>
+            {Object.entries(allChoices[activeTab].choices || {}).map(([dish, qty], i) => (
+              <div key={i}>{dish.trim()}: {qty}</div>
+            ))}
+          </p>
+          <p>Antipasto di mare: {allChoices[activeTab].noStarter ? "❌" : "✅"}</p>
+          <button onClick={() => openEdit(activeTab)} style={{ marginRight: "10px" }}>Modifica</button>
+          <button onClick={() => handleDeleteSingle(activeTab)} style={{ color: "red" }}>🗑️ Elimina</button>
+        </div>
+      )}
+
+      <h3 style={{ marginTop: "40px" }}>🍽️ Totale piatti per tipo:</h3>
       <hr />
       <ul>
         {allDishes.map((dish, idx) => (
@@ -221,25 +163,12 @@ export default function AdminPanel() {
       </ul>
 
       <div style={{ textAlign: "center", marginTop: "30px" }}>
-        <button onClick={handleReset} style={{ backgroundColor: "#a94444", color: "white", padding: "10px 20px", borderRadius: "8px", cursor: "pointer" }}>
+        <button
+          onClick={handleReset}
+          style={{ backgroundColor: "#a94444", color: "white", padding: "10px 20px", borderRadius: "8px", cursor: "pointer" }}
+        >
           ❌ Reset scelte
         </button>
-      </div>
-
-      {/* ✅ CONTENUTO PER LA STAMPA */}
-      <div ref={printRef} style={{ display: "none" }}>
-        <img src="/logo.png" alt="Logo Masseria" />
-        <h2>Ordini per camera</h2>
-        <ul>
-          {allChoices.map(({ room, choices, noStarter }, idx) => (
-            <li key={idx}>
-              <strong>Camera {room}:</strong>{" "}
-              {getOrderedChoicesString(choices || {})}
-              {" — "}
-              Antipasto di mare: {noStarter ? "❌" : "✅"}
-            </li>
-          ))}
-        </ul>
       </div>
 
       {/* ✅ POPUP DI MODIFICA */}
@@ -256,7 +185,7 @@ export default function AdminPanel() {
             <h3>✏️ Modifica scelta - Camera {editData.room}</h3>
             {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
-                {dish}:{" "}
+                {dish}: {" "}
                 <input
                   type="number"
                   value={editData.choices[dish] || ""}
@@ -268,7 +197,7 @@ export default function AdminPanel() {
             ))}
 
             <div style={{ marginTop: "20px" }}>
-              Antipasto di mare:&nbsp;
+              Antipasto di mare: {" "}
               <input
                 type="checkbox"
                 checked={!editData.noStarter}
@@ -283,7 +212,7 @@ export default function AdminPanel() {
             </div>
 
             <div style={{ marginTop: "20px" }}>
-              {otherKey}:{" "}
+              {otherKey}: {" "}
               <input
                 type="text"
                 value={editData.choices[otherKey] || ""}
@@ -293,10 +222,16 @@ export default function AdminPanel() {
             </div>
 
             <div style={{ marginTop: "30px", textAlign: "right" }}>
-              <button onClick={handleSaveEdit} style={{ marginRight: "10px", backgroundColor: "#4a5f44", color: "#fff", padding: "10px", borderRadius: "6px" }}>
+              <button
+                onClick={handleSaveEdit}
+                style={{ marginRight: "10px", backgroundColor: "#4a5f44", color: "#fff", padding: "10px", borderRadius: "6px" }}
+              >
                 Salva
               </button>
-              <button onClick={() => setEditIndex(null)} style={{ backgroundColor: "#aaa", color: "#fff", padding: "10px", borderRadius: "6px" }}>
+              <button
+                onClick={() => setEditIndex(null)}
+                style={{ backgroundColor: "#aaa", color: "#fff", padding: "10px", borderRadius: "6px" }}
+              >
                 Annulla
               </button>
             </div>
