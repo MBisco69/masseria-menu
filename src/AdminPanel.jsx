@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
@@ -110,21 +110,27 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
-  // 🖨️ STAMPA COMANDA DA BROWSER
   const handlePrintSingle = (room, choices, noStarter) => {
-    const logoUrl = "/logo.png";
-    const lines = [];
-    lines.push(`<h2 style="margin-bottom: 10px;">🏛️ MASSERIA TORRE</h2>`);
-    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
-    lines.push(`<strong>Camera:</strong> ${room}`);
-    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
-    Object.entries(choices).forEach(([dish, qty]) => {
-      if (qty) lines.push(`<div>${dish}: ${qty}</div>`);
-    });
-    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
-    lines.push(`Antipasto di mare: ${noStarter ? "❌" : "✅"}`);
-
     const printWindow = window.open("", "_blank");
+    const logoUrl = "/logo.png";
+    const entries = [];
+
+    menuData.firstCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    });
+
+    menuData.secondCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    });
+
+    if (choices[otherKey]) {
+      entries.push(`<li>${otherKey}: ${choices[otherKey]}</li>`);
+    }
+
     printWindow.document.write(`
       <html>
         <head>
@@ -132,20 +138,38 @@ export default function AdminPanel() {
           <style>
             body {
               font-family: monospace;
-              font-size: 14px;
-              padding: 20px;
+              font-size: 16px;
+              padding: 10px;
               margin: 0;
               text-align: center;
+            }
+            img {
+              width: 150px;
+              margin-bottom: 10px;
+            }
+            ul {
+              padding: 0;
+              list-style: none;
+              text-align: left;
+            }
+            li {
+              margin: 6px 0;
             }
           </style>
         </head>
         <body>
-          <img src="${logoUrl}" width="120" alt="logo" />
-          ${lines.join("<br/>")}
+          <img src="${logoUrl}" alt="Logo" />
+          <h2>Camera ${room}</h2>
+          <ul>
+            ${entries.join("\n")}
+          </ul>
+          <p>Antipasto di mare: ${noStarter ? "❌" : "✅"}</p>
           <script>
             window.onload = function () {
               window.print();
-              setTimeout(() => window.close(), 200);
+              window.onafterprint = function () {
+                window.close();
+              };
             };
           </script>
         </body>
