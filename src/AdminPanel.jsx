@@ -110,30 +110,48 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
-  // 🖨️ STAMPA CONANDA tramite SERVER LOCALE NODE.JS
-  const handlePrintSingle = async (room, choices, noStarter) => {
-    const data = {
-      room,
-      choices,
-      noStarter
-    };
+  // 🖨️ STAMPA COMANDA DA BROWSER
+  const handlePrintSingle = (room, choices, noStarter) => {
+    const logoUrl = "/logo.png";
+    const lines = [];
+    lines.push(`<h2 style="margin-bottom: 10px;">🏛️ MASSERIA TORRE</h2>`);
+    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
+    lines.push(`<strong>Camera:</strong> ${room}`);
+    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
+    Object.entries(choices).forEach(([dish, qty]) => {
+      if (qty) lines.push(`<div>${dish}: ${qty}</div>`);
+    });
+    lines.push(`<hr style="border: 1px dashed black; margin: 10px 0;" />`);
+    lines.push(`Antipasto di mare: ${noStarter ? "❌" : "✅"}`);
 
-    try {
-      const res = await fetch("http://localhost:3001/print", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!res.ok) {
-        alert("Errore durante la stampa. Verifica che il server sia avviato.");
-      }
-    } catch (err) {
-      console.error("Errore stampa:", err);
-      alert("Stampante non raggiungibile. Assicurati che il server Node.js sia attivo.");
-    }
+    const printWindow = window.open("", "_blank");
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Comanda Camera ${room}</title>
+          <style>
+            body {
+              font-family: monospace;
+              font-size: 14px;
+              padding: 20px;
+              margin: 0;
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${logoUrl}" width="120" alt="logo" />
+          ${lines.join("<br/>")}
+          <script>
+            window.onload = function () {
+              window.print();
+              setTimeout(() => window.close(), 200);
+            };
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
   };
 
   const totals = allDishes.reduce((acc, dish) => {
