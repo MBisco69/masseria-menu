@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
@@ -110,72 +110,30 @@ export default function AdminPanel() {
     setEditIndex(null);
   };
 
-  const handlePrintSingle = (room, choices, noStarter) => {
-    const printWindow = window.open("", "_blank");
-    const logoUrl = "/logo.png";
-    const entries = [];
+  // 🖨️ STAMPA CONANDA tramite SERVER LOCALE NODE.JS
+  const handlePrintSingle = async (room, choices, noStarter) => {
+    const data = {
+      room,
+      choices,
+      noStarter
+    };
 
-    menuData.firstCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
-    });
+    try {
+      const res = await fetch("http://localhost:3001/print", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
-    menuData.secondCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
-    });
-
-    if (choices[otherKey]) {
-      entries.push(`<li>${otherKey}: ${choices[otherKey]}</li>`);
+      if (!res.ok) {
+        alert("Errore durante la stampa. Verifica che il server sia avviato.");
+      }
+    } catch (err) {
+      console.error("Errore stampa:", err);
+      alert("Stampante non raggiungibile. Assicurati che il server Node.js sia attivo.");
     }
-
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>Comanda Camera ${room}</title>
-          <style>
-            body {
-              font-family: monospace;
-              font-size: 16px;
-              padding: 10px;
-              margin: 0;
-              text-align: center;
-            }
-            img {
-              width: 150px;
-              margin-bottom: 10px;
-            }
-            ul {
-              padding: 0;
-              list-style: none;
-              text-align: left;
-            }
-            li {
-              margin: 6px 0;
-            }
-          </style>
-        </head>
-        <body>
-          <img src="${logoUrl}" alt="Logo" />
-          <h2>Camera ${room}</h2>
-          <ul>
-            ${entries.join("\n")}
-          </ul>
-          <p>Antipasto di mare: ${noStarter ? "❌" : "✅"}</p>
-          <script>
-            window.onload = function () {
-              window.print();
-              window.onafterprint = function () {
-                window.close();
-              };
-            };
-          </script>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
   };
 
   const totals = allDishes.reduce((acc, dish) => {
