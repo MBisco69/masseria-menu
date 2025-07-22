@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 22/07/2025",
+    title: "Menù del giorno 23/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 22/07/2025",
+    title: "Menu of the Day 23/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 22/07/2025",
+    title: "Tagesmenü 23/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 21/07/2025
+// ✅ Menu aggiornato 22/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Scialatielli con pesto di rucola e polpo",
-      en: "Scialatielli with arugula pesto and octopus",
-      de: "Scialatielli mit Rucolapesto und Oktopus"
+      it: "Trofie in crema di basilico",
+      en: "Trofie pasta with basil cream",
+      de: "Trofie mit Basilikumcreme"
     },
     {
-      it: "Cavatelli con patate, fagiolini e pomodorini ciliegino",
-      en: "Cavatelli with potatoes, green beans and cherry tomatoes",
-      de: "Cavatelli mit Kartoffeln, grünen Bohnen und Kirschtomaten"
+      it: "Lasagnetta con ceci e gamberi",
+      en: "Mini lasagna with chickpeas and prawns",
+      de: "Lasagnetta mit Kichererbsen und Garnelen"
     }
   ],
   secondCourses: [
     {
-      it: "Orata al forno",
-      en: "Baked gilthead seabream",
-      de: "Im Ofen gebratene Dorade"
+      it: "Filetto di scorfano con pomodorini e olive nere",
+      en: "Red scorpionfish fillet with cherry tomatoes and black olives",
+      de: "Skorpionfischfilet mit Kirschtomaten und schwarzen Oliven"
     },
     {
-      it: "Salsiccia alla griglia",
-      en: "Grilled sausage",
-      de: "Gegrillte Wurst"
+      it: "Capocollo di maiale ai ferri",
+      en: "Grilled pork neck",
+      de: "Gegrillter Schweinenacken"
     }
   ]
 };

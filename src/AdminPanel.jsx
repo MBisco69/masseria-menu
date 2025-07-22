@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 21/07/2025
+// ✅ Menu aggiornato 22/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Scialatielli con pesto di rucola e polpo" },
-    { it: "Cavatelli con patate, fagiolini e pomodorini ciliegino" }
+    { it: "Trofie in crema di basilico" },
+    { it: "Lasagnetta con ceci e gamberi" }
   ],
   secondCourses: [
-    { it: "Orata al forno" },
-    { it: "Salsiccia alla griglia" }
+    { it: "Filetto di scorfano con pomodorini e olive nere" },
+    { it: "Capocollo di maiale ai ferri" }
   ]
 };
 
