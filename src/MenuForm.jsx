@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 25/07/2025",
+    title: "Menù del giorno 26/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 25/07/2025",
+    title: "Menu of the Day 26/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 25/07/2025",
+    title: "Tagesmenü 26/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 23/07/2025
+// ✅ Menu aggiornato 26/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Strascinate con sugo di melanzane ripiene e cacioricotta",
-      en: "Strascinate pasta with stuffed eggplant sauce and cacioricotta cheese",
-      de: "Strascinate mit gefüllter Auberginensauce und Cacioricotta"
+      it: "Tagliolini con cozze e datterini gialli e rossi",
+      en: "Tagliolini with mussels and yellow-red cherry tomatoes",
+      de: "Tagliolini mit Miesmuscheln und gelb-roten Datteltomaten"
     },
     {
-      it: "Linguine con sugo di canocchie e peperoncino fresco",
-      en: "Linguine with mantis shrimp sauce and fresh chili",
-      de: "Linguine mit Garnelensauce und frischer Chili"
+      it: "Lagane con le cicerchie",
+      en: "Lagane pasta with grass peas",
+      de: "Lagane mit Platterbsen"
     }
   ],
   secondCourses: [
     {
-      it: "Spigola alla griglia",
-      en: "Grilled sea bass",
-      de: "Gegrillter Wolfsbarsch"
+      it: "Carne di vitello alla pizzaiola",
+      en: "Veal pizzaiola style",
+      de: "Kalbfleisch nach Pizzaiola-Art"
     },
     {
-      it: "Melanzana ripiena",
-      en: "Stuffed eggplant",
-      de: "Gefüllte Aubergine"
+      it: "Coda di rana pescatrice con patate e pomodorini",
+      en: "Monkfish tail with potatoes and cherry tomatoes",
+      de: "Seeteufelschwanz mit Kartoffeln und Kirschtomaten"
     }
   ]
 };
