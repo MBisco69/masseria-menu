@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 26/07/2025",
+    title: "Menù del giorno 27/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 26/07/2025",
+    title: "Menu of the Day 27/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 26/07/2025",
+    title: "Tagesmenü 27/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 26/07/2025
+// ✅ Menu aggiornato 27/07/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Tagliolini con cozze e datterini gialli e rossi",
-      en: "Tagliolini with mussels and yellow-red cherry tomatoes",
-      de: "Tagliolini mit Miesmuscheln und gelb-roten Datteltomaten"
+      it: "Ziti con ragù di carne di involtino e pecorino",
+      en: "Ziti with rolled meat ragù and pecorino cheese",
+      de: "Ziti mit Rinderrouladenragù und Pecorino"
     },
     {
-      it: "Lagane con le cicerchie",
-      en: "Lagane pasta with grass peas",
-      de: "Lagane mit Platterbsen"
+      it: "Paccheri agli scampi",
+      en: "Paccheri pasta with scampi",
+      de: "Paccheri mit Kaisergranat"
     }
   ],
   secondCourses: [
     {
-      it: "Carne di vitello alla pizzaiola",
-      en: "Veal pizzaiola style",
-      de: "Kalbfleisch nach Pizzaiola-Art"
+      it: "Involtino di manzo",
+      en: "Beef roll",
+      de: "Rinderroulade"
     },
     {
-      it: "Coda di rana pescatrice con patate e pomodorini",
-      en: "Monkfish tail with potatoes and cherry tomatoes",
-      de: "Seeteufelschwanz mit Kartoffeln und Kirschtomaten"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried squid and prawns",
+      de: "Gemischte frittierte Tintenfische und Garnelen"
     }
   ]
 };
