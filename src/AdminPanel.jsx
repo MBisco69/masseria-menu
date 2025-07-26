@@ -251,6 +251,29 @@ export default function AdminPanel() {
             width: "90%", maxWidth: "500px", boxShadow: "0 0 15px rgba(0,0,0,0.3)"
           }}>
             <h3>✏️ Modifica scelta - Camera {editData.room}</h3>
+
+            <div style={{ marginBottom: "20px" }}>
+              <label style={{ fontWeight: "bold" }}>Numero Camera:</label>
+              <input
+                type="text"
+                value={editData.room}
+                onChange={(e) =>
+                  setEditData((prev) => ({
+                    ...prev,
+                    room: e.target.value
+                  }))
+                }
+                style={{
+                  width: "100%",
+                  padding: "8px",
+                  marginTop: "6px",
+                  borderRadius: "6px",
+                  backgroundColor: "#f1f1f1",
+                  color: "#000"
+                }}
+              />
+            </div>
+
             {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
                 {dish}: {" "}
