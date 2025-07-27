@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 27/07/2025
+// ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Ziti con ragù di carne di involtino e pecorino" },
-    { it: "Paccheri agli scampi" }
+    { it: "Troccoli con sugo di seppia ripiena e pecorino" },
+    { it: "Orecchiette alle cime di rapa" }
   ],
   secondCourses: [
-    { it: "Involtino di manzo" },
-    { it: "Frittura mista di calamari e gamberi" }
+    { it: "Seppia ripiena" },
+    { it: "Pollo arrosto con patate speziate" }
   ]
 };
 
