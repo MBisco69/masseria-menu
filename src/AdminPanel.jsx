@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Troccoli con sugo di seppia ripiena e pecorino" },
-    { it: "Orecchiette alle cime di rapa" }
+    { it: "Pasta e fagioli" },
+    { it: "Chitarrina allo scoglio" }
   ],
   secondCourses: [
-    { it: "Seppia ripiena" },
-    { it: "Pollo arrosto con patate speziate" }
+    { it: "Bombette pugliesi" },
+    { it: "Gamberoni alla griglia" }
   ]
 };
 

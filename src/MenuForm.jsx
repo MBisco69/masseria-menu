@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 28/07/2025",
+    title: "Menù del giorno 29/07/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 28/07/2025",
+    title: "Menu of the Day 29/07/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 28/07/2025",
+    title: "Tagesmenü 29/07/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -49,26 +49,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Troccoli con sugo di seppia ripiena e pecorino",
-      en: "Troccoli pasta with stuffed cuttlefish sauce and pecorino",
-      de: "Troccoli mit gefülltem Tintenfischragout und Pecorino"
+      it: "Pasta e fagioli",
+      en: "Pasta with beans",
+      de: "Nudeln mit Bohnen"
     },
     {
-      it: "Orecchiette alle cime di rapa",
-      en: "Orecchiette with turnip tops",
-      de: "Orecchiette mit Stängelkohl"
+      it: "Chitarrina allo scoglio",
+      en: "Chitarrine with seafood",
+      de: "Chitarrina mit Meeresfrüchten"
     }
   ],
   secondCourses: [
     {
-      it: "Seppia ripiena",
-      en: "Stuffed cuttlefish",
-      de: "Gefüllter Tintenfisch"
+      it: "Bombette pugliesi",
+      en: "Pork Meatrolls with Caciocavallo cheese within",
+      de: "Gefüllte Fleischröllchen aus Apulien"
     },
     {
-      it: "Pollo arrosto con patate speziate",
-      en: "Roast chicken with spiced potatoes",
-      de: "Brathähnchen mit gewürzten Kartoffeln"
+      it: "Gamberoni alla griglia",
+      en: "Grilled prawns",
+      de: "Gegrillte Riesengarnelen"
     }
   ]
 };
