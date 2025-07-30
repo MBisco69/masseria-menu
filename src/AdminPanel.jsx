@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Pasta e fagioli" },
-    { it: "Chitarrina allo scoglio" }
+    { it: "cicatelli con cicorietta, olive nere e pane croccante" },
+    { it: "gnocchetti con funghi porcini e cozze" }
   ],
   secondCourses: [
-    { it: "Bombette pugliesi" },
-    { it: "Gamberoni alla griglia" }
+    { it: "filetto di ombrina con zucchine e patate" },
+    { it: "tagliata di vitello con grana pomodorini e rucola" }
   ]
 };
 
