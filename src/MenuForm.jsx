@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 31/07/2025",
+    title: "Menù del giorno 01/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 31/07/2025",
+    title: "Menu of the Day 01/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 31/07/2025",
+    title: "Tagesmenü 01/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -49,26 +49,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "cicatelli con cicorietta, olive nere e pane croccante",
-      en: "cicatelli with chicory, black olives and crunchy bread ",
-      de: "Cicatelli mit Zichorie, schwarzen Oliven und knusprigem Brot"
+      it: "Spaghetti con i lupini di mare",
+      en: "Spaghetti with sealupins ",
+      de: "Spaghetti mit Venusmuscheln"
     },
     {
-      it: "gnocchetti con funghi porcini e cozze",
-      en: "gnocchetti with porcini mushrooms and mussels",
-      de: " Gnocchetti mit Steinpilzen und Miesmuscheln "
+      it: "Pasta alla crudaiola",
+      en: "Pasta with tomatoes, mozzarella, onions and basil ",
+      de: " Pasta mit frischen, rohen Zutaten "
     }
   ],
   secondCourses: [
     {
-      it: "filetto di ombrina con zucchine e patate",
-      en: "croacker fillet with zucchini and potatoes",
-      de: "  Umbrinenfilet mit Zucchini und Kartoffeln  "
+      it: "Sogliola alla mugnaia",
+      en: "Solefish floured and baked ",
+      de: "Seezunge nach Müllerinart "
     },
     {
-      it: "tagliata di vitello con grana pomodorini e rucola",
-      en: "veal stripes with grana cherry tomatoes and rocket salad ",
-      de: "Kalbs-Tagliata mit Grana, Kirschtomaten und Rucola "
+      it: "Arrosto di lonza",
+      en: "Roasted pork loin",
+      de: " Schweinerückenbraten"
     }
   ]
 };

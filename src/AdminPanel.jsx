@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "cicatelli con cicorietta, olive nere e pane croccante" },
-    { it: "gnocchetti con funghi porcini e cozze" }
+    { it: "Spaghetti con i lupini di mare" },
+    { it: "Pasta alla crudaiola" }
   ],
   secondCourses: [
-    { it: "filetto di ombrina con zucchine e patate" },
-    { it: "tagliata di vitello con grana pomodorini e rucola" }
+    { it: "Sogliola alla mugnaia" },
+    { it: "Arrosto di lonza" }
   ]
 };
 
