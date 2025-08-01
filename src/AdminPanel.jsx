@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Spaghetti con i lupini di mare" },
-    { it: "Pasta alla crudaiola" }
+    { it: "Risotto ai frutti di mare" },
+    { it: "Spaghetti con pomodorino fresco, pinoli, crema di mozzarella e basilico" }
   ],
   secondCourses: [
-    { it: "Sogliola alla mugnaia" },
-    { it: "Arrosto di lonza" }
+    { it: "Pesce spada alla griglia" },
+    { it: "Spiedino di carne" }
   ]
 };
 

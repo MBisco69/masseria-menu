@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 01/08/2025",
+    title: "Menù del giorno 02/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 01/08/2025",
+    title: "Menu of the Day 02/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 01/08/2025",
+    title: "Tagesmenü 02/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 28/07/2025
+// ✅ Menu aggiornato 01/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Spaghetti con i lupini di mare",
-      en: "Spaghetti with sealupins ",
-      de: "Spaghetti mit Venusmuscheln"
+      it: "Risotto ai frutti di mare",
+      en: "Seafood risotto",
+      de: "Meeresfrüchte-Risotto"
     },
     {
-      it: "Pasta alla crudaiola",
-      en: "Pasta with tomatoes, mozzarella, onions and basil ",
-      de: " Pasta mit frischen, rohen Zutaten "
+      it: "Spaghetti con pomodorino fresco, pinoli, crema di mozzarella e basilico",
+      en: "Spaghetti with cherry tomatoes, pine nuts, mozzarella cream and basil",
+      de: "Spaghetti mit Kirschtomaten, Pinienkernen, Mozzarellacreme und Basilikum"
     }
   ],
   secondCourses: [
     {
-      it: "Sogliola alla mugnaia",
-      en: "Solefish floured and baked ",
-      de: "Seezunge nach Müllerinart "
+      it: "Pesce spada alla griglia",
+      en: "Grilled swordfish",
+      de: "Gegrilltes Schwertfischsteak"
     },
     {
-      it: "Arrosto di lonza",
-      en: "Roasted pork loin",
-      de: " Schweinerückenbraten"
+      it: "Spiedino di carne",
+      en: "Meat skewer",
+      de: "Fleischspieß"
     }
   ]
 };
@@ -94,7 +94,7 @@ export default function MenuForm() {
     e.preventDefault();
     if (!room) {
       alert(t.roomPlaceholder);
-      return;prawns
+      return;
     }
 
     const choices = {};
