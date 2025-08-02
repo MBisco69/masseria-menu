@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "Risotto ai frutti di mare" },
-    { it: "Spaghetti con pomodorino fresco, pinoli, crema di mozzarella e basilico" }
+    { it: "ziti con ragu di involtini di carne e pecorino" },
+    { it: "chitarrine al nero di seppia" }
   ],
   secondCourses: [
-    { it: "Pesce spada alla griglia" },
-    { it: "Spiedino di carne" }
+    { it: "involtino di carne" },
+    { it: "frittura calamri e gamberi" }
   ]
 };
 
