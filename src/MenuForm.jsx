@@ -49,26 +49,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Risotto ai frutti di mare",
-      en: "Seafood risotto",
-      de: "Meeresfrüchte-Risotto"
+      it: "ziti con ragu di involtini di carne e pecorino",
+      en: "Ziti pasta with meat roll ragù and pecorino cheese",
+      de: "Ziti mit Fleischröllchen-Ragout und Pecorino-Käse"
     },
     {
-      it: "Spaghetti con pomodorino fresco, pinoli, crema di mozzarella e basilico",
-      en: "Spaghetti with cherry tomatoes, pine nuts, mozzarella cream and basil",
-      de: "Spaghetti mit Kirschtomaten, Pinienkernen, Mozzarellacreme und Basilikum"
+      it: "chitarrine al nero di seppia",
+      en: "Squid ink chitarrine pasta"
+      de: "Chitarrine mit Tintenfischtinte"
     }
   ],
   secondCourses: [
     {
-      it: "Pesce spada alla griglia",
-      en: "Grilled swordfish",
-      de: "Gegrilltes Schwertfischsteak"
+      it: "involtino di carne",
+      en: "meat roll",
+      de: "Fleischröllchen"
     },
     {
-      it: "Spiedino di carne",
-      en: "Meat skewer",
-      de: "Fleischspieß"
+      it: "frittura calamri e gamberi",
+      en: "Fried calamari and shrimp",
+      de: "Frittierte Calamari und Garnelen"
     }
   ]
 };
