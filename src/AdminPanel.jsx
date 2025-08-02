@@ -14,9 +14,12 @@ const menuData = {
   ]
 };
 
+const otherKey = "Altro";
+
 const allDishes = [
   ...menuData.firstCourses.map(d => d.it.trim()),
-  ...menuData.secondCourses.map(d => d.it.trim())
+  ...menuData.secondCourses.map(d => d.it.trim()),
+  otherKey
 ];
 
 export default function AdminPanel() {
@@ -25,8 +28,6 @@ export default function AdminPanel() {
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
-
-  const otherKey = "Altro";
 
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
@@ -179,7 +180,10 @@ export default function AdminPanel() {
   };
 
   const totals = allDishes.reduce((acc, dish) => {
-    acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
+    acc[dish] = allChoices.reduce((sum, entry) => {
+      const value = entry.choices?.[dish];
+      return sum + (typeof value === "number" ? value : typeof value === "string" ? 1 : 0);
+    }, 0);
     return acc;
   }, {});
 
@@ -230,7 +234,11 @@ export default function AdminPanel() {
       <hr />
       <ul>
         {allDishes.map((dish, idx) => (
-          <li key={idx}>{`${dish}: ${totals[dish]}`}</li>
+          <li key={idx}>
+            {dish === otherKey
+              ? `${otherKey}: ${totals[dish]} ${totals[dish] === 1 ? "nota" : "note"}`
+              : `${dish}: ${totals[dish]}`}
+          </li>
         ))}
       </ul>
 
@@ -274,7 +282,7 @@ export default function AdminPanel() {
               />
             </div>
 
-            {allDishes.map((dish, idx) => (
+            {allDishes.filter(d => d !== otherKey).map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
                 {dish}: {" "}
                 <input
