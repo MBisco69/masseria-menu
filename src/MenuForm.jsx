@@ -45,13 +45,13 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 01/08/2025
+// ✅ Menu aggiornato 03/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Ziti con ragu di involtini di carne e pecorino",
-      en: "Ziti pasta with meat roll ragù and pecorino cheese",
-      de: "Ziti mit Fleischröllchen-Ragout und Pecorino-Käse"
+      it: "Ziti con ragù di carne di involtino e pecorino",
+      en: "Ziti with rolled meat ragù and pecorino cheese",
+      de: "Ziti mit Rinderrouladenragù und Pecorino"
     },
     {
       it: "Chitarrine al nero di seppia",
@@ -63,12 +63,12 @@ const menuData = {
     {
       it: "Involtino di carne",
       en: "Meat roll",
-      de: "Fleischröllchen"
+      de: "Fleischroulade"
     },
     {
-      it: "Frittura di calamari e gamberi",
-      en: "Fried calamari and shrimp",
-      de: "Frittierte Calamari und Garnelen"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried squid and prawns",
+      de: "Gemischte frittierte Tintenfische und Garnelen"
     }
   ]
 };

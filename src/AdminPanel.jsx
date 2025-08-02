@@ -2,6 +2,23 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
+// ✅ Menu aggiornato 03/08/2025
+const menuData = {
+  firstCourses: [
+    { it: "Ziti con ragù di carne di involtino e pecorino" },
+    { it: "Chitarrine al nero di seppia" }
+  ],
+  secondCourses: [
+    { it: "Involtino di carne" },
+    { it: "Frittura mista di calamari e gamberi" }
+  ]
+};
+
+const allDishes = [
+  ...menuData.firstCourses.map(d => d.it.trim()),
+  ...menuData.secondCourses.map(d => d.it.trim())
+];
+
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
@@ -98,10 +115,16 @@ export default function AdminPanel() {
     const logoUrl = "/logo.png";
     const entries = [];
 
-    Object.entries(choices || {}).forEach(([dish, qty]) => {
-      if (dish !== otherKey && qty) {
-        entries.push(`<li>${dish}: ${qty}</li>`);
-      }
+    menuData.firstCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    });
+
+    menuData.secondCourses.forEach(d => {
+      const name = d.it.trim();
+      const qty = choices[name];
+      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
     });
 
     if (choices[otherKey]) {
@@ -154,20 +177,6 @@ export default function AdminPanel() {
     `);
     printWindow.document.close();
   };
-
-  const getAllUniqueDishes = (entries) => {
-    const dishSet = new Set();
-    entries.forEach(entry => {
-      if (entry.choices) {
-        Object.keys(entry.choices).forEach(dish => {
-          dishSet.add(dish.trim());
-        });
-      }
-    });
-    return Array.from(dishSet);
-  };
-
-  const allDishes = getAllUniqueDishes(allChoices);
 
   const totals = allDishes.reduce((acc, dish) => {
     acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
