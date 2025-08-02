@@ -2,38 +2,14 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 28/07/2025
-const menuData = {
-  firstCourses: [
-    { it: "Ziti con ragu di involtini di carne e pecorino" },
-    { it: "Chitarrine al nero di seppia" }
-  ],
-  secondCourses: [
-    { it: "Involtino di carne" },
-    { it: "Frittura di calamari e gamberi" }
-  ]
-};
-
-const otherKey = "Altro";
-
-const getAllUniqueDishes = (entries) => {
-  const dishSet = new Set();
-  entries.forEach(entry => {
-    if (entry.choices) {
-      Object.keys(entry.choices).forEach(dish => {
-        dishSet.add(dish.trim());
-      });
-    }
-  });
-  return Array.from(dishSet);
-};
-
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
+
+  const otherKey = "Altro";
 
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
@@ -52,8 +28,6 @@ export default function AdminPanel() {
 
     return () => unsubscribe();
   }, []);
-
-  const allDishes = getAllUniqueDishes(allChoices);
 
   const handleReset = () => {
     if (window.confirm("Vuoi davvero cancellare tutte le scelte?")) {
@@ -124,7 +98,7 @@ export default function AdminPanel() {
     const logoUrl = "/logo.png";
     const entries = [];
 
-    Object.entries(choices).forEach(([dish, qty]) => {
+    Object.entries(choices || {}).forEach(([dish, qty]) => {
       if (dish !== otherKey && qty) {
         entries.push(`<li>${dish}: ${qty}</li>`);
       }
@@ -180,6 +154,20 @@ export default function AdminPanel() {
     `);
     printWindow.document.close();
   };
+
+  const getAllUniqueDishes = (entries) => {
+    const dishSet = new Set();
+    entries.forEach(entry => {
+      if (entry.choices) {
+        Object.keys(entry.choices).forEach(dish => {
+          dishSet.add(dish.trim());
+        });
+      }
+    });
+    return Array.from(dishSet);
+  };
+
+  const allDishes = getAllUniqueDishes(allChoices);
 
   const totals = allDishes.reduce((acc, dish) => {
     acc[dish] = allChoices.reduce((sum, entry) => sum + (entry.choices?.[dish.trim()] || 0), 0);
@@ -279,7 +267,7 @@ export default function AdminPanel() {
 
             {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
-                {dish}:{" "}
+                {dish}: {" "}
                 <input
                   type="number"
                   value={editData.choices[dish] || ""}
@@ -291,7 +279,7 @@ export default function AdminPanel() {
             ))}
 
             <div style={{ marginTop: "20px" }}>
-              Antipasto di mare:{" "}
+              Antipasto di mare: {" "}
               <input
                 type="checkbox"
                 checked={!editData.noStarter}
@@ -306,7 +294,7 @@ export default function AdminPanel() {
             </div>
 
             <div style={{ marginTop: "20px" }}>
-              {otherKey}:{" "}
+              {otherKey}: {" "}
               <input
                 type="text"
                 value={editData.choices[otherKey] || ""}
