@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
@@ -14,10 +14,19 @@ const menuData = {
   ]
 };
 
-const allDishes = [
-  ...menuData.firstCourses.map(d => d.it.trim()),
-  ...menuData.secondCourses.map(d => d.it.trim())
-];
+const otherKey = "Altro";
+
+const getAllUniqueDishes = (entries) => {
+  const dishSet = new Set();
+  entries.forEach(entry => {
+    if (entry.choices) {
+      Object.keys(entry.choices).forEach(dish => {
+        dishSet.add(dish.trim());
+      });
+    }
+  });
+  return Array.from(dishSet);
+};
 
 export default function AdminPanel() {
   const [allChoices, setAllChoices] = useState([]);
@@ -25,8 +34,6 @@ export default function AdminPanel() {
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
-
-  const otherKey = "Altro";
 
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
@@ -45,6 +52,8 @@ export default function AdminPanel() {
 
     return () => unsubscribe();
   }, []);
+
+  const allDishes = getAllUniqueDishes(allChoices);
 
   const handleReset = () => {
     if (window.confirm("Vuoi davvero cancellare tutte le scelte?")) {
@@ -115,16 +124,10 @@ export default function AdminPanel() {
     const logoUrl = "/logo.png";
     const entries = [];
 
-    menuData.firstCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
-    });
-
-    menuData.secondCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    Object.entries(choices).forEach(([dish, qty]) => {
+      if (dish !== otherKey && qty) {
+        entries.push(`<li>${dish}: ${qty}</li>`);
+      }
     });
 
     if (choices[otherKey]) {
@@ -276,7 +279,7 @@ export default function AdminPanel() {
 
             {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
-                {dish}: {" "}
+                {dish}:{" "}
                 <input
                   type="number"
                   value={editData.choices[dish] || ""}
@@ -288,7 +291,7 @@ export default function AdminPanel() {
             ))}
 
             <div style={{ marginTop: "20px" }}>
-              Antipasto di mare: {" "}
+              Antipasto di mare:{" "}
               <input
                 type="checkbox"
                 checked={!editData.noStarter}
@@ -303,7 +306,7 @@ export default function AdminPanel() {
             </div>
 
             <div style={{ marginTop: "20px" }}>
-              {otherKey}: {" "}
+              {otherKey}:{" "}
               <input
                 type="text"
                 value={editData.choices[otherKey] || ""}
