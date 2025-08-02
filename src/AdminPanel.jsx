@@ -5,12 +5,12 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 28/07/2025
 const menuData = {
   firstCourses: [
-    { it: "ziti con ragu di involtini di carne e pecorino" },
-    { it: "chitarrine al nero di seppia" }
+    { it: "Ziti con ragu di involtini di carne e pecorino" },
+    { it: "Chitarrine al nero di seppia" }
   ],
   secondCourses: [
-    { it: "involtino di carne" },
-    { it: "frittura calamri e gamberi" }
+    { it: "Involtino di carne" },
+    { it: "Frittura di calamari e gamberi" }
   ]
 };
 

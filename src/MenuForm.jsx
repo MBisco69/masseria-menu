@@ -49,24 +49,24 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "ziti con ragu di involtini di carne e pecorino",
+      it: "Ziti con ragu di involtini di carne e pecorino",
       en: "Ziti pasta with meat roll ragù and pecorino cheese",
       de: "Ziti mit Fleischröllchen-Ragout und Pecorino-Käse"
     },
     {
-      it: "chitarrine al nero di seppia",
+      it: "Chitarrine al nero di seppia",
       en: "Squid ink chitarrine pasta",
       de: "Chitarrine mit Tintenfischtinte"
     }
   ],
   secondCourses: [
     {
-      it: "involtino di carne",
-      en: "meat roll",
+      it: "Involtino di carne",
+      en: "Meat roll",
       de: "Fleischröllchen"
     },
     {
-      it: "frittura calamri e gamberi",
+      it: "Frittura di calamari e gamberi",
       en: "Fried calamari and shrimp",
       de: "Frittierte Calamari und Garnelen"
     }
