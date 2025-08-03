@@ -5,21 +5,19 @@ import { onValue, ref, remove, update } from "firebase/database";
 // ✅ Menu aggiornato 03/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Ziti con ragù di carne di involtino e pecorino" },
-    { it: "Chitarrine al nero di seppia" }
+    { it: "Cavatelli con patate rucola e provola affumicata" },
+    { it: "Orecchiette con gamberetti e porcini" }
   ],
   secondCourses: [
-    { it: "Involtino di carne" },
-    { it: "Frittura mista di calamari e gamberi" }
+    { it: "Filetto di orata con patate e carciofi" },
+    { it: "Tagliata di pollo con verdure croccanti" }
   ]
 };
-
-const otherKey = "Altro";
 
 const allDishes = [
   ...menuData.firstCourses.map(d => d.it.trim()),
   ...menuData.secondCourses.map(d => d.it.trim()),
-  otherKey
+  "Altro"
 ];
 
 export default function AdminPanel() {
@@ -28,6 +26,8 @@ export default function AdminPanel() {
   const [editData, setEditData] = useState({ room: "", choices: {}, noStarter: false });
   const [entryKeys, setEntryKeys] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
+
+  const otherKey = "Altro";
 
   useEffect(() => {
     const scelteRef = ref(db, "scelte");
@@ -97,7 +97,10 @@ export default function AdminPanel() {
 
     Object.entries(editData.choices || {}).forEach(([dish, qty]) => {
       const trimmedDish = dish.trim();
-      if ((typeof qty === "number" && qty > 0) || (trimmedDish === otherKey && qty.trim())) {
+      if (
+        (typeof qty === "number" && qty > 0) ||
+        (trimmedDish === otherKey && qty.trim())
+      ) {
         cleanedChoices[trimmedDish] = qty;
       }
     });
@@ -116,21 +119,12 @@ export default function AdminPanel() {
     const logoUrl = "/logo.png";
     const entries = [];
 
-    menuData.firstCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
+    allDishes.forEach((dish) => {
+      const qty = choices[dish];
+      if (qty) {
+        entries.push(`<li>${dish}: ${qty}</li>`);
+      }
     });
-
-    menuData.secondCourses.forEach(d => {
-      const name = d.it.trim();
-      const qty = choices[name];
-      if (qty) entries.push(`<li>${name}: ${qty}</li>`);
-    });
-
-    if (choices[otherKey]) {
-      entries.push(`<li>${otherKey}: ${choices[otherKey]}</li>`);
-    }
 
     printWindow.document.write(`
       <html>
@@ -181,8 +175,10 @@ export default function AdminPanel() {
 
   const totals = allDishes.reduce((acc, dish) => {
     acc[dish] = allChoices.reduce((sum, entry) => {
-      const value = entry.choices?.[dish];
-      return sum + (typeof value === "number" ? value : typeof value === "string" ? 1 : 0);
+      const val = entry.choices?.[dish];
+      if (typeof val === "string") return sum + 1;
+      if (typeof val === "number") return sum + val;
+      return sum;
     }, 0);
     return acc;
   }, {});
@@ -234,11 +230,7 @@ export default function AdminPanel() {
       <hr />
       <ul>
         {allDishes.map((dish, idx) => (
-          <li key={idx}>
-            {dish === otherKey
-              ? `${otherKey}: ${totals[dish]} ${totals[dish] === 1 ? "nota" : "note"}`
-              : `${dish}: ${totals[dish]}`}
-          </li>
+          <li key={idx}>{`${dish}: ${totals[dish]}`}</li>
         ))}
       </ul>
 
@@ -282,15 +274,18 @@ export default function AdminPanel() {
               />
             </div>
 
-            {allDishes.filter(d => d !== otherKey).map((dish, idx) => (
+            {allDishes.map((dish, idx) => (
               <div key={idx} style={{ marginBottom: "10px" }}>
                 {dish}: {" "}
                 <input
-                  type="number"
+                  type={dish === otherKey ? "text" : "number"}
                   value={editData.choices[dish] || ""}
-                  min="0"
-                  onChange={(e) => handleEditChange(dish, e.target.value)}
-                  style={{ width: "60px", marginLeft: "10px" }}
+                  onChange={(e) =>
+                    dish === otherKey
+                      ? handleOtherChange(e.target.value)
+                      : handleEditChange(dish, e.target.value)
+                  }
+                  style={{ width: dish === otherKey ? "100%" : "60px", marginLeft: "10px" }}
                 />
               </div>
             ))}
@@ -308,16 +303,6 @@ export default function AdminPanel() {
                 }
               />
               <span>{!editData.noStarter ? "✅" : "❌"}</span>
-            </div>
-
-            <div style={{ marginTop: "20px" }}>
-              {otherKey}: {" "}
-              <input
-                type="text"
-                value={editData.choices[otherKey] || ""}
-                onChange={(e) => handleOtherChange(e.target.value)}
-                style={{ width: "100%" }}
-              />
             </div>
 
             <div style={{ marginTop: "30px", textAlign: "right" }}>

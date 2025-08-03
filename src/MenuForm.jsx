@@ -49,26 +49,26 @@ const translations = {
 const menuData = {
   firstCourses: [
     {
-      it: "Ziti con ragù di carne di involtino e pecorino",
-      en: "Ziti with rolled meat ragù and pecorino cheese",
-      de: "Ziti mit Rinderrouladenragù und Pecorino"
+      it: "Cavatelli con patate rucola e provola affumicata",
+      en: "Cavatelli with potatoes, arugula, and smoked provola",
+      de: "Cavatelli mit Kartoffeln, Rucola und geräucherter Provola"
     },
     {
-      it: "Chitarrine al nero di seppia",
-      en: "Squid ink chitarrine pasta",
-      de: "Chitarrine mit Tintenfischtinte"
+      it: "Orecchiette con gamberetti e porcini",
+      en: "Orecchiette with shrimp and porcini mushrooms",
+      de: "Orecchiette mit Garnelen und Steinpilzen"
     }
   ],
   secondCourses: [
     {
-      it: "Involtino di carne",
-      en: "Meat roll",
-      de: "Fleischroulade"
+      it: "Filetto di orata con patate e carciofi",
+      en: "Sea bream fillet with potatoes and artichokes",
+      de: "Doradenfilet mit Kartoffeln und Artischocken"
     },
     {
-      it: "Frittura mista di calamari e gamberi",
-      en: "Mixed fried squid and prawns",
-      de: "Gemischte frittierte Tintenfische und Garnelen"
+      it: "Tagliata di pollo con verdure croccanti",
+      en: "Sliced chicken with crispy vegetables",
+      de: "Hähnchen-Tagliata mit knusprigem Gemüse"
     }
   ]
 };
@@ -115,7 +115,7 @@ export default function MenuForm() {
       await push(ref(db, "scelte"), {
         room,
         choices,
-        antipasto: !noStarter
+        noStarter
       });
       alert("Ordine inviato con successo!");
     } catch (error) {
