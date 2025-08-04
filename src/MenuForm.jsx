@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 04/08/2025",
+    title: "Menù del giorno 05/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 04/08/2025",
+    title: "Menu of the Day 05/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 04/08/2025",
+    title: "Tagesmenü 05/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 03/08/2025
+// ✅ Menu aggiornato 04/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Cavatelli con patate rucola e provola affumicata",
-      en: "Cavatelli with potatoes, arugula, and smoked provola",
-      de: "Cavatelli mit Kartoffeln, Rucola und geräucherter Provola"
+      it: "Risoni con cozze e datterini",
+      en: "Risoni pasta with mussels and cherry tomatoes",
+      de: "Risoni mit Miesmuscheln und Datteltomaten"
     },
     {
-      it: "Orecchiette con gamberetti e porcini",
-      en: "Orecchiette with shrimp and porcini mushrooms",
-      de: "Orecchiette mit Garnelen und Steinpilzen"
+      it: "Strascinate con sugo di melanzana ripiena e cacioricotta",
+      en: "Strascinate with stuffed eggplant sauce and cacioricotta cheese",
+      de: "Strascinate mit gefüllter Auberginensauce und Cacioricotta"
     }
   ],
   secondCourses: [
     {
-      it: "Filetto di orata con patate e carciofi",
-      en: "Sea bream fillet with potatoes and artichokes",
-      de: "Doradenfilet mit Kartoffeln und Artischocken"
+      it: "Coda di rospo",
+      en: "Monkfish",
+      de: "Seeteufel"
     },
     {
-      it: "Tagliata di pollo con verdure croccanti",
-      en: "Sliced chicken with crispy vegetables",
-      de: "Hähnchen-Tagliata mit knusprigem Gemüse"
+      it: "Melanzana ripiena",
+      en: "Stuffed eggplant",
+      de: "Gefüllte Aubergine"
     }
   ]
 };
