@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 05/08/2025",
+    title: "Menù del giorno 06/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 05/08/2025",
+    title: "Menu of the Day 06/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 05/08/2025",
+    title: "Tagesmenü 06/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 04/08/2025
+// ✅ Menu aggiornato 06/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Risoni con cozze e datterini",
-      en: "Risoni pasta with mussels and cherry tomatoes",
-      de: "Risoni mit Miesmuscheln und Datteltomaten"
+      it: "Scialatielli con pesto di rucola e polpo",
+      en: "Scialatielli pasta with rocket pesto and octopus",
+      de: "Scialatielli mit Rucola-Pesto und Oktopus"
     },
     {
-      it: "Strascinate con sugo di melanzana ripiena e cacioricotta",
-      en: "Strascinate with stuffed eggplant sauce and cacioricotta cheese",
-      de: "Strascinate mit gefüllter Auberginensauce und Cacioricotta"
+      it: "Lasagna vegetariana",
+      en: "Vegetarian lasagna",
+      de: "Vegetarische Lasagne"
     }
   ],
   secondCourses: [
     {
-      it: "Coda di rospo",
-      en: "Monkfish",
-      de: "Seeteufel"
+      it: "Spigola al sale",
+      en: "Salt-crusted sea bass",
+      de: "Wolfsbarsch in Salzkruste"
     },
     {
-      it: "Melanzana ripiena",
-      en: "Stuffed eggplant",
-      de: "Gefüllte Aubergine"
+      it: "Medaglioni di arista agli agrumi",
+      en: "Pork loin medallions with citrus sauce",
+      de: "Schweinerücken-Medaillons mit Zitrussauce"
     }
   ]
 };
