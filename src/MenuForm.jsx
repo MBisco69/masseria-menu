@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 06/08/2025",
+    title: "Menù del giorno 08/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 06/08/2025",
+    title: "Menu of the Day 08/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 06/08/2025",
+    title: "Tagesmenü 08/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 06/08/2025
+// ✅ Menu aggiornato 08/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Scialatielli con pesto di rucola e polpo",
-      en: "Scialatielli pasta with rocket pesto and octopus",
-      de: "Scialatielli mit Rucola-Pesto und Oktopus"
+      it: "Bavette al sugo di canocchie e vongole",
+      en: "Bavette with mantis shrimp and clams sauce",
+      de: "Bavette mit Garnelen-Krabben- und Venusmuschelsauce"
     },
     {
-      it: "Lasagna vegetariana",
-      en: "Vegetarian lasagna",
-      de: "Vegetarische Lasagne"
+      it: "Orecchiette alle cime di rapa",
+      en: "Orecchiette with turnip greens",
+      de: "Orecchiette mit Stängelkohl"
     }
   ],
   secondCourses: [
     {
-      it: "Spigola al sale",
-      en: "Salt-crusted sea bass",
-      de: "Wolfsbarsch in Salzkruste"
+      it: "Trancio di ricciola al vapore con salicornia",
+      en: "Steamed amberjack fillet with samphire",
+      de: "Gedämpftes Bernsteinmakrelenfilet mit Queller"
     },
     {
-      it: "Medaglioni di arista agli agrumi",
-      en: "Pork loin medallions with citrus sauce",
-      de: "Schweinerücken-Medaillons mit Zitrussauce"
+      it: "Coniglio alla cacciatora",
+      en: "Hunter-style rabbit",
+      de: "Kaninchen nach Jägerart"
     }
   ]
 };

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 06/08/2025
+// ✅ Menu aggiornato 08/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Scialatielli con pesto di rucola e polpo" },
-    { it: "Lasagna vegetariana" }
+    { it: "Bavette al sugo di canocchie e vongole" },
+    { it: "Orecchiette alle cime di rapa" }
   ],
   secondCourses: [
-    { it: "Spigola al sale" },
-    { it: "Medaglioni di arista agli agrumi" }
+    { it: "Trancio di ricciola al vapore con salicornia" },
+    { it: "Coniglio alla cacciatora" }
   ]
 };
 
