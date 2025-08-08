@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 08/08/2025",
+    title: "Menù del giorno 09/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 08/08/2025",
+    title: "Menu of the Day 09/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 08/08/2025",
+    title: "Tagesmenü 09/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 08/08/2025
+// ✅ Menu aggiornato 09/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Bavette al sugo di canocchie e vongole",
-      en: "Bavette with mantis shrimp and clams sauce",
-      de: "Bavette mit Garnelen-Krabben- und Venusmuschelsauce"
+      it: "Linguine aglio olio e peperoncino in crema di cavolfiore e pane all'acciuga",
+      en: "Linguine with garlic, oil and chili in cauliflower cream with anchovy bread",
+      de: "Linguine mit Knoblauch, Öl und Chili in Blumenkohlcreme mit Sardellenbrot"
     },
     {
-      it: "Orecchiette alle cime di rapa",
-      en: "Orecchiette with turnip greens",
-      de: "Orecchiette mit Stängelkohl"
+      it: "Tubettini con cozze e fagioli",
+      en: "Tubettini pasta with mussels and beans",
+      de: "Tubettini mit Miesmuscheln und Bohnen"
     }
   ],
   secondCourses: [
     {
-      it: "Trancio di ricciola al vapore con salicornia",
-      en: "Steamed amberjack fillet with samphire",
-      de: "Gedämpftes Bernsteinmakrelenfilet mit Queller"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried calamari and prawns",
+      de: "Gemischte frittierte Calamari und Garnelen"
     },
     {
-      it: "Coniglio alla cacciatora",
-      en: "Hunter-style rabbit",
-      de: "Kaninchen nach Jägerart"
+      it: "Bombette pugliesi",
+      en: "Apulian pork rolls",
+      de: "Apulische Schweineröllchen"
     }
   ]
 };
