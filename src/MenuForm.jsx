@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 09/08/2025",
+    title: "Menù del giorno 10/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 09/08/2025",
+    title: "Menu of the Day 10/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 09/08/2025",
+    title: "Tagesmenü 10/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 09/08/2025
+// ✅ Menu aggiornato 10/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Linguine aglio olio e peperoncino in crema di cavolfiore e pane all'acciuga",
-      en: "Linguine with garlic, oil and chili in cauliflower cream with anchovy bread",
-      de: "Linguine mit Knoblauch, Öl und Chili in Blumenkohlcreme mit Sardellenbrot"
+      it: "Troccoli al nero di seppia con gamberi, in crema di zucchine e stracciatella al profumo di limone",
+      en: "Squid-ink troccoli with shrimp, zucchini cream and stracciatella, lemon-scented",
+      de: "Troccoli mit Tintenfischtinte und Garnelen, auf Zucchinicreme mit Stracciatella und Zitronenduft"
     },
     {
-      it: "Tubettini con cozze e fagioli",
-      en: "Tubettini pasta with mussels and beans",
-      de: "Tubettini mit Miesmuscheln und Bohnen"
+      it: "Ziti con ragù di carne di involtino e pecorino",
+      en: "Ziti pasta with meat-roll ragù and pecorino cheese",
+      de: "Ziti mit Ragout aus Fleischröllchen und Pecorino"
     }
   ],
   secondCourses: [
     {
-      it: "Frittura mista di calamari e gamberi",
-      en: "Mixed fried calamari and prawns",
-      de: "Gemischte frittierte Calamari und Garnelen"
+      it: "Ombrina all'acqua pazza con patate",
+      en: "Meagre ‘acqua pazza’ with potatoes",
+      de: "Adlerfisch „acqua pazza“ mit Kartoffeln"
     },
     {
-      it: "Bombette pugliesi",
-      en: "Apulian pork rolls",
-      de: "Apulische Schweineröllchen"
+      it: "Involtino",
+      en: "Meat roll",
+      de: "Fleischröllchen"
     }
   ]
 };
