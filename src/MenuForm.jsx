@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 10/08/2025",
+    title: "Menù del giorno 11/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 10/08/2025",
+    title: "Menu of the Day 11/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 10/08/2025",
+    title: "Tagesmenü 11/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 10/08/2025
+// ✅ Menu aggiornato 11/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Troccoli al nero di seppia con gamberi, in crema di zucchine e stracciatella al profumo di limone",
-      en: "Squid-ink troccoli with shrimp, zucchini cream and stracciatella, lemon-scented",
-      de: "Troccoli mit Tintenfischtinte und Garnelen, auf Zucchinicreme mit Stracciatella und Zitronenduft"
+      it: "Chitarrina allo scoglio",
+      en: "Chitarrina pasta with seafood",
+      de: "Chitarrina mit Meeresfrüchten"
     },
     {
-      it: "Ziti con ragù di carne di involtino e pecorino",
-      en: "Ziti pasta with meat-roll ragù and pecorino cheese",
-      de: "Ziti mit Ragout aus Fleischröllchen und Pecorino"
+      it: "Risotto con carciofi e tartufo",
+      en: "Risotto with artichokes and truffle",
+      de: "Risotto mit Artischocken und Trüffel"
     }
   ],
   secondCourses: [
     {
-      it: "Ombrina all'acqua pazza con patate",
-      en: "Meagre ‘acqua pazza’ with potatoes",
-      de: "Adlerfisch „acqua pazza“ mit Kartoffeln"
+      it: "Capocollo di maiale alla griglia",
+      en: "Grilled pork neck",
+      de: "Gegrillter Schweinehals"
     },
     {
-      it: "Involtino",
-      en: "Meat roll",
-      de: "Fleischröllchen"
+      it: "Sogliola alla mugnaia",
+      en: "Sole meunière",
+      de: "Seezunge nach Müllerinart"
     }
   ]
 };

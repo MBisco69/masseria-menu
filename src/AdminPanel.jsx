@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 10/08/2025
+// ✅ Menu aggiornato 11/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Troccoli al nero di seppia con gamberi, in crema di zucchine e stracciatella al profumo di limone" },
-    { it: "Ziti con ragù di carne di involtino e pecorino" }
+    { it: "Chitarrina allo scoglio" },
+    { it: "Risotto con carciofi e tartufo" }
   ],
   secondCourses: [
-    { it: "Ombrina all'acqua pazza con patate" },
-    { it: "Involtino" }
+    { it: "Capocollo di maiale alla griglia" },
+    { it: "Sogliola alla mugnaia" }
   ]
 };
 
