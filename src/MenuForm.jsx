@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 11/08/2025",
+    title: "Menù del giorno 13/08/2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 11/08/2025",
+    title: "Menu of the Day 13/08/2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 11/08/2025",
+    title: "Tagesmenü 13/08/2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 11/08/2025
+// ✅ Menu aggiornato 13/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Chitarrina allo scoglio",
-      en: "Chitarrina pasta with seafood",
-      de: "Chitarrina mit Meeresfrüchten"
+      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
+      en: "Troccoli with stuffed cuttlefish sauce and cacioricotta",
+      de: "Troccoli mit Sauce aus gefüllter Sepia und Cacioricotta"
     },
     {
-      it: "Risotto con carciofi e tartufo",
-      en: "Risotto with artichokes and truffle",
-      de: "Risotto mit Artischocken und Trüffel"
+      it: "Orecchiette con cicorietta, olive nere e pane croccante",
+      en: "Orecchiette with wild chicory, black olives and crunchy bread",
+      de: "Orecchiette mit wilder Zichorie, schwarzen Oliven und knusprigem Brot"
     }
   ],
   secondCourses: [
     {
-      it: "Capocollo di maiale alla griglia",
-      en: "Grilled pork neck",
-      de: "Gegrillter Schweinehals"
+      it: "Seppia ripiena",
+      en: "Stuffed cuttlefish",
+      de: "Gefüllte Sepia"
     },
     {
-      it: "Sogliola alla mugnaia",
-      en: "Sole meunière",
-      de: "Seezunge nach Müllerinart"
+      it: "Salsiccia alla griglia",
+      en: "Grilled sausage",
+      de: "Gegrillte Wurst"
     }
   ]
 };
