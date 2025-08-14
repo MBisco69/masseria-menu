@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del giorno 13/08/2025",
+    title: "Menù di Ferragosto",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of the Day 13/08/2025",
+    title: "Ferragosto Menu",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Tagesmenü 13/08/2025",
+    title: "Ferragosto-Menü",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 13/08/2025
+// ✅ Menu aggiornato Ferragosto 13/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
-      en: "Troccoli with stuffed cuttlefish sauce and cacioricotta",
-      de: "Troccoli mit Sauce aus gefüllter Sepia und Cacioricotta"
+      it: "Medaglioni ripieni di gamberi, scampi e stracciatella, al profumo di limone",
+      en: "Medallions stuffed with prawns, scampi and stracciatella, with a hint of lemon",
+      de: "Medaillons gefüllt mit Garnelen, Kaisergranat und Stracciatella, mit Zitronenaroma"
     },
     {
-      it: "Orecchiette con cicorietta, olive nere e pane croccante",
-      en: "Orecchiette with wild chicory, black olives and crunchy bread",
-      de: "Orecchiette mit wilder Zichorie, schwarzen Oliven und knusprigem Brot"
+      it: "Lasagna",
+      en: "Lasagna",
+      de: "Lasagne"
     }
   ],
   secondCourses: [
     {
-      it: "Seppia ripiena",
-      en: "Stuffed cuttlefish",
-      de: "Gefüllte Sepia"
+      it: "Roastbeef",
+      en: "Roast beef",
+      de: "Roastbeef"
     },
     {
-      it: "Salsiccia alla griglia",
-      en: "Grilled sausage",
-      de: "Gegrillte Wurst"
+      it: "Sanpietro gratinato con finocchi, arancia e mela verde",
+      en: "Gratinated John Dory with fennel, orange and green apple",
+      de: "Überbackener Petersfisch mit Fenchel, Orange und grüner Apfel"
     }
   ]
 };
