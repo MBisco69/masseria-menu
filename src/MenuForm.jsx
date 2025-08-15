@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù di Ferragosto",
+    title: "Menù del 16 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Ferragosto Menu",
+    title: "Menu of August 16, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Ferragosto-Menü",
+    title: "Menü vom 16. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato Ferragosto 13/08/2025
+// ✅ Menu aggiornato 16/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Medaglioni ripieni di gamberi, scampi e stracciatella, al profumo di limone",
-      en: "Medallions stuffed with prawns, scampi and stracciatella, with a hint of lemon",
-      de: "Medaillons gefüllt mit Garnelen, Kaisergranat und Stracciatella, mit Zitronenaroma"
+      it: "Spaghetti in bianco con cozze e peperoncino fresco",
+      en: "Plain spaghetti with mussels and fresh chili pepper",
+      de: "Spaghetti in Weiß mit Miesmuscheln und frischer Chilischote"
     },
     {
-      it: "Lasagna",
-      en: "Lasagna",
-      de: "Lasagne"
+      it: "Strascinate con sugo di melanzana ripiena",
+      en: "Strascinate pasta with stuffed eggplant sauce",
+      de: "Strascinate mit Sauce aus gefüllter Aubergine"
     }
   ],
   secondCourses: [
     {
-      it: "Roastbeef",
-      en: "Roast beef",
-      de: "Roastbeef"
+      it: "Melanzana ripiena",
+      en: "Stuffed eggplant",
+      de: "Gefüllte Aubergine"
     },
     {
-      it: "Sanpietro gratinato con finocchi, arancia e mela verde",
-      en: "Gratinated John Dory with fennel, orange and green apple",
-      de: "Überbackener Petersfisch mit Fenchel, Orange und grüner Apfel"
+      it: "Frittura",
+      en: "Fried seafood",
+      de: "Frittierte Meeresfrüchte"
     }
   ]
 };

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato Ferragosto 13/08/2025
+// ✅ Menu aggiornato 16/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Medaglioni ripieni di gamberi, scampi e stracciatella, al profumo di limone" },
-    { it: "Lasagna" }
+    { it: "Spaghetti in bianco con cozze e peperoncino fresco" },
+    { it: "Strascinate con sugo di melanzana ripiena" }
   ],
   secondCourses: [
-    { it: "Roastbeef" },
-    { it: "Sanpietro gratinato con finocchi, arancia e mela verde" }
+    { it: "Melanzana ripiena" },
+    { it: "Frittura" }
   ]
 };
 
