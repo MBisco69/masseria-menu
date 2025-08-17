@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 16 Agosto 2025",
+    title: "Menù del 18 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 16, 2025",
+    title: "Menu of August 18, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 16. August 2025",
+    title: "Menü vom 18. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 16/08/2025
+// ✅ Menu aggiornato 18/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Spaghetti in bianco con cozze e peperoncino fresco",
-      en: "Plain spaghetti with mussels and fresh chili pepper",
-      de: "Spaghetti in Weiß mit Miesmuscheln und frischer Chilischote"
+      it: "Trofie in crema di basilico",
+      en: "Trofie pasta in basil cream",
+      de: "Trofie in Basilikumcreme"
     },
     {
-      it: "Strascinate con sugo di melanzana ripiena",
-      en: "Strascinate pasta with stuffed eggplant sauce",
-      de: "Strascinate mit Sauce aus gefüllter Aubergine"
+      it: "Paccheri agli scampi",
+      en: "Paccheri with scampi",
+      de: "Paccheri mit Scampi"
     }
   ],
   secondCourses: [
     {
-      it: "Melanzana ripiena",
-      en: "Stuffed eggplant",
-      de: "Gefüllte Aubergine"
+      it: "Spiedino di carne",
+      en: "Meat skewer",
+      de: "Fleischspieß"
     },
     {
-      it: "Frittura",
-      en: "Fried seafood",
-      de: "Frittierte Meeresfrüchte"
+      it: "Spigola al sale",
+      en: "Salt-crusted sea bass",
+      de: "Wolfsbarsch in Salzkruste"
     }
   ]
 };

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 16/08/2025
+// ✅ Menu aggiornato 18/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Spaghetti in bianco con cozze e peperoncino fresco" },
-    { it: "Strascinate con sugo di melanzana ripiena" }
+    { it: "Trofie in crema di basilico" },
+    { it: "Paccheri agli scampi" }
   ],
   secondCourses: [
-    { it: "Melanzana ripiena" },
-    { it: "Frittura" }
+    { it: "Spiedino di carne" },
+    { it: "Spigola al sale" }
   ]
 };
 
