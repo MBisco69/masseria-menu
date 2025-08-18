@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 18 Agosto 2025",
+    title: "Menù del 19 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 18, 2025",
+    title: "Menu of August 19, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 18. August 2025",
+    title: "Menü vom 19. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 18/08/2025
+// ✅ Menu aggiornato 19/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Trofie in crema di basilico",
-      en: "Trofie pasta in basil cream",
-      de: "Trofie in Basilikumcreme"
+      it: "Cavatelli con patate e scamorza affumicata",
+      en: "Cavatelli with potatoes and smoked scamorza cheese",
+      de: "Cavatelli mit Kartoffeln und geräucherter Scamorza"
     },
     {
-      it: "Paccheri agli scampi",
-      en: "Paccheri with scampi",
-      de: "Paccheri mit Scampi"
+      it: "Gnocchetti cozze e porcini",
+      en: "Gnocchetti with mussels and porcini mushrooms",
+      de: "Gnocchetti mit Miesmuscheln und Steinpilzen"
     }
   ],
   secondCourses: [
     {
-      it: "Spiedino di carne",
-      en: "Meat skewer",
-      de: "Fleischspieß"
+      it: "Trancio di ricciola al vapore con salicornia al limone",
+      en: "Steamed amberjack fillet with lemon samphire",
+      de: "Gedämpftes Bernsteinmakrelenfilet mit Zitronen-Queller"
     },
     {
-      it: "Spigola al sale",
-      en: "Salt-crusted sea bass",
-      de: "Wolfsbarsch in Salzkruste"
+      it: "Tagliata di pollo speziato con rucola e grana",
+      en: "Sliced spiced chicken with arugula and parmesan",
+      de: "Geschnittenes gewürztes Huhn mit Rucola und Parmesan"
     }
   ]
 };
