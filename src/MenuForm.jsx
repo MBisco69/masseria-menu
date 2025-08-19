@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 19 Agosto 2025",
+    title: "Menù del 20 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 19, 2025",
+    title: "Menu of August 20, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 19. August 2025",
+    title: "Menü vom 20. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 19/08/2025
+// ✅ Menu aggiornato 20/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Cavatelli con patate e scamorza affumicata",
-      en: "Cavatelli with potatoes and smoked scamorza cheese",
-      de: "Cavatelli mit Kartoffeln und geräucherter Scamorza"
+      it: "Orecchiette con le cime di rapa",
+      en: "Orecchiette pasta with turnip tops",
+      de: "Orecchiette mit Stängelkohl"
     },
     {
-      it: "Gnocchetti cozze e porcini",
-      en: "Gnocchetti with mussels and porcini mushrooms",
-      de: "Gnocchetti mit Miesmuscheln und Steinpilzen"
+      it: "Spaghettone ai lupini di mare",
+      en: "Thick spaghetti with clams",
+      de: "Spaghettone mit Venusmuscheln"
     }
   ],
   secondCourses: [
     {
-      it: "Trancio di ricciola al vapore con salicornia al limone",
-      en: "Steamed amberjack fillet with lemon samphire",
-      de: "Gedämpftes Bernsteinmakrelenfilet mit Zitronen-Queller"
+      it: "Orata alla griglia",
+      en: "Grilled gilthead bream",
+      de: "Gegrillte Goldbrasse"
     },
     {
-      it: "Tagliata di pollo speziato con rucola e grana",
-      en: "Sliced spiced chicken with arugula and parmesan",
-      de: "Geschnittenes gewürztes Huhn mit Rucola und Parmesan"
+      it: "Filetto di maialino al tartufo",
+      en: "Suckling pig fillet with truffle",
+      de: "Spanferkelfilet mit Trüffel"
     }
   ]
 };
