@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 20 Agosto 2025",
+    title: "Menù del 22 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 20, 2025",
+    title: "Menu of August 22, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 20. August 2025",
+    title: "Menü vom 22. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 20/08/2025
+// ✅ Menu aggiornato 22/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Orecchiette con le cime di rapa",
-      en: "Orecchiette pasta with turnip tops",
-      de: "Orecchiette mit Stängelkohl"
+      it: "Linguine al sugo di granchio",
+      en: "Linguine with crab sauce",
+      de: "Linguine mit Krabbensauce"
     },
     {
-      it: "Spaghettone ai lupini di mare",
-      en: "Thick spaghetti with clams",
-      de: "Spaghettone mit Venusmuscheln"
+      it: "Pasta e fagioli alla peschiciana",
+      en: "Pasta and beans Peschici style",
+      de: "Pasta und Bohnen nach Peschici-Art"
     }
   ],
   secondCourses: [
     {
-      it: "Orata alla griglia",
-      en: "Grilled gilthead bream",
-      de: "Gegrillte Goldbrasse"
+      it: "Salsiccia alla griglia",
+      en: "Grilled sausage",
+      de: "Gegrillte Wurst"
     },
     {
-      it: "Filetto di maialino al tartufo",
-      en: "Suckling pig fillet with truffle",
-      de: "Spanferkelfilet mit Trüffel"
+      it: "Ombrina con patate e carciofi",
+      en: "Shi drum with potatoes and artichokes",
+      de: "Umbrina mit Kartoffeln und Artischocken"
     }
   ]
 };
