@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 22 Agosto 2025",
+    title: "Menù del 23 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 22, 2025",
+    title: "Menu of August 23, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 22. August 2025",
+    title: "Menü vom 23. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 22/08/2025
+// ✅ Menu aggiornato 23/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Linguine al sugo di granchio",
-      en: "Linguine with crab sauce",
-      de: "Linguine mit Krabbensauce"
+      it: "Risotto alla marinara",
+      en: "Seafood risotto",
+      de: "Meeresfrüchte-Risotto"
     },
     {
-      it: "Pasta e fagioli alla peschiciana",
-      en: "Pasta and beans Peschici style",
-      de: "Pasta und Bohnen nach Peschici-Art"
+      it: "Chitarrina in crema di mozzarella con pomodorino fresco, basilico e pinoli",
+      en: "Chitarrina pasta with mozzarella cream, fresh cherry tomatoes, basil and pine nuts",
+      de: "Chitarrina mit Mozzarellacreme, frischen Kirschtomaten, Basilikum und Pinienkernen"
     }
   ],
   secondCourses: [
     {
-      it: "Salsiccia alla griglia",
-      en: "Grilled sausage",
-      de: "Gegrillte Wurst"
+      it: "Frittura mista di calamari e gamberi",
+      en: "Mixed fried calamari and prawns",
+      de: "Gemischte frittierte Calamari und Garnelen"
     },
     {
-      it: "Ombrina con patate e carciofi",
-      en: "Shi drum with potatoes and artichokes",
-      de: "Umbrina mit Kartoffeln und Artischocken"
+      it: "Arrosto di lonza",
+      en: "Roast pork loin",
+      de: "Schweinelendenbraten"
     }
   ]
 };
