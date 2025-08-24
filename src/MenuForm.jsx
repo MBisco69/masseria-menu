@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 24 Agosto 2025",
+    title: "Menù del 25 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 24, 2025",
+    title: "Menu of August 25, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 24. August 2025",
+    title: "Menü vom 25. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 24/08/2025
+// ✅ Menu aggiornato 25/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Ziti con ragù di involtini di carne e pecorino",
-      en: "Ziti with meat roll ragout and pecorino",
-      de: "Ziti mit Fleischröllchen-Ragout und Pecorino"
+      it: "Spaghetti aglio, olio e peperoncino in crema di cavolfiore e pane all'acciuga",
+      en: "Spaghetti with garlic, oil and chili in cauliflower cream and anchovy bread",
+      de: "Spaghetti mit Knoblauch, Öl und Chili in Blumenkohlcreme und Sardellenbrot"
     },
     {
-      it: "Orecchiette con funghi porcini e gamberi",
-      en: "Orecchiette with porcini mushrooms and prawns",
-      de: "Orecchiette mit Steinpilzen und Garnelen"
+      it: "Risoni con le cozze",
+      en: "Risoni pasta with mussels",
+      de: "Risoni mit Miesmuscheln"
     }
   ],
   secondCourses: [
     {
-      it: "Scorfano",
-      en: "Scorpionfish",
-      de: "Skorpionfisch"
+      it: "Sogliola alla mugnaia",
+      en: "Sole à la meunière",
+      de: "Seezunge Müllerinart"
     },
     {
-      it: "Involtino di carne",
-      en: "Meat roll",
-      de: "Fleischröllchen"
+      it: "Brasato",
+      en: "Braised beef",
+      de: "Geschmortes Rindfleisch"
     }
   ]
 };
