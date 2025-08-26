@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 26 Agosto 2025",
+    title: "Menù del 27 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 26, 2025",
+    title: "Menu of August 27, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 26. August 2025",
+    title: "Menü vom 27. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 26/08/2025
+// ✅ Menu aggiornato 27/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Linguine al nero di seppia",
-      en: "Linguine with squid ink",
-      de: "Linguine mit Tintenfischtinte"
+      it: "Chitarrine con gamberi, stracciatella e profumo di limone",
+      en: "Chitarrine with prawns, stracciatella and hint of lemon",
+      de: "Chitarrine mit Garnelen, Stracciatella und Zitronenduft"
     },
     {
-      it: "Pasta alla crudaiola",
-      en: "Pasta alla crudaiola (with raw tomatoes and basil)",
-      de: "Pasta alla crudaiola (mit rohen Tomaten und Basilikum)"
+      it: "Strascinate con sugo di melanzane ripiene e cacioricotta",
+      en: "Strascinate pasta with stuffed eggplant sauce and cacioricotta cheese",
+      de: "Strascinate mit gefüllter Auberginensauce und Cacioricotta-Käse"
     }
   ],
   secondCourses: [
     {
-      it: "Pesce spada in salmorigano",
-      en: "Swordfish in salmorigano sauce",
-      de: "Schwertfisch in Salmorigano-Sauce"
+      it: "Gamberoni alla griglia",
+      en: "Grilled king prawns",
+      de: "Gegrillte Riesengarnelen"
     },
     {
-      it: "Cosciotti di pollo al forno con patate",
-      en: "Baked chicken drumsticks with potatoes",
-      de: "Gebackene Hähnchenkeulen mit Kartoffeln"
+      it: "Melanzane ripiene",
+      en: "Stuffed eggplants",
+      de: "Gefüllte Auberginen"
     }
   ]
 };
