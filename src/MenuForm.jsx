@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 27 Agosto 2025",
+    title: "Menù del 28 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 27, 2025",
+    title: "Menu of August 28, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 27. August 2025",
+    title: "Menü vom 28. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 27/08/2025
+// ✅ Menu aggiornato 28/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Chitarrine con gamberi, stracciatella e profumo di limone",
-      en: "Chitarrine with prawns, stracciatella and hint of lemon",
-      de: "Chitarrine mit Garnelen, Stracciatella und Zitronenduft"
+      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
+      en: "Troccoli pasta with stuffed cuttlefish sauce and cacioricotta cheese",
+      de: "Troccoli mit gefüllter Sepia-Sauce und Cacioricotta"
     },
     {
-      it: "Strascinate con sugo di melanzane ripiene e cacioricotta",
-      en: "Strascinate pasta with stuffed eggplant sauce and cacioricotta cheese",
-      de: "Strascinate mit gefüllter Auberginensauce und Cacioricotta-Käse"
+      it: "Cicatelli con verza, bietola e fonduta di formaggi locali",
+      en: "Cicatelli with savoy cabbage, chard and local cheese fondue",
+      de: "Cicatelli mit Wirsing, Mangold und Käsefondue aus der Region"
     }
   ],
   secondCourses: [
     {
-      it: "Gamberoni alla griglia",
-      en: "Grilled king prawns",
-      de: "Gegrillte Riesengarnelen"
+      it: "Seppia ripiena",
+      en: "Stuffed cuttlefish",
+      de: "Gefüllte Sepia"
     },
     {
-      it: "Melanzane ripiene",
-      en: "Stuffed eggplants",
-      de: "Gefüllte Auberginen"
+      it: "Scaloppina agli agrumi",
+      en: "Scaloppina with citrus",
+      de: "Scaloppina mit Zitrusfrüchten"
     }
   ]
 };
