@@ -5,7 +5,7 @@ import { push, ref } from "firebase/database";
 
 const translations = {
   it: {
-    title: "Menù del 28 Agosto 2025",
+    title: "Menù del 30 Agosto 2025",
     languageLabel: "Seleziona la lingua",
     roomLabel: "Numero camera",
     roomPlaceholder: "Inserire il numero della stanza",
@@ -18,7 +18,7 @@ const translations = {
     noStarter: "Non desidero l'antipasto di mare"
   },
   en: {
-    title: "Menu of August 28, 2025",
+    title: "Menu of August 30, 2025",
     languageLabel: "Select language",
     roomLabel: "Room number",
     roomPlaceholder: "Enter room number",
@@ -31,7 +31,7 @@ const translations = {
     noStarter: "I don't want the seafood starter"
   },
   de: {
-    title: "Menü vom 28. August 2025",
+    title: "Menü vom 30. August 2025",
     languageLabel: "Sprache auswählen",
     roomLabel: "Zimmernummer",
     roomPlaceholder: "Zimmernummer eingeben",
@@ -45,30 +45,30 @@ const translations = {
   }
 };
 
-// ✅ Menu aggiornato 28/08/2025
+// ✅ Menu aggiornato 30/08/2025
 const menuData = {
   firstCourses: [
     {
-      it: "Troccoli con sugo di seppia ripiena e cacioricotta",
-      en: "Troccoli pasta with stuffed cuttlefish sauce and cacioricotta cheese",
-      de: "Troccoli mit gefüllter Sepia-Sauce und Cacioricotta"
+      it: "Scialatielli con pesto di rucola e polpo",
+      en: "Scialatielli with arugula pesto and octopus",
+      de: "Scialatielli mit Rucolapesto und Oktopus"
     },
     {
-      it: "Cicatelli con verza, bietola e fonduta di formaggi locali",
-      en: "Cicatelli with savoy cabbage, chard and local cheese fondue",
-      de: "Cicatelli mit Wirsing, Mangold und Käsefondue aus der Region"
+      it: "Lagane con cicerchia",
+      en: "Lagane pasta with cicerchia beans",
+      de: "Lagane mit Cicerchia-Bohnen"
     }
   ],
   secondCourses: [
     {
-      it: "Seppia ripiena",
-      en: "Stuffed cuttlefish",
-      de: "Gefüllte Sepia"
+      it: "Roast beef",
+      en: "Roast beef",
+      de: "Roastbeef"
     },
     {
-      it: "Scaloppina agli agrumi",
-      en: "Scaloppina with citrus",
-      de: "Scaloppina mit Zitrusfrüchten"
+      it: "Orata alla griglia",
+      en: "Grilled gilthead bream",
+      de: "Gegrillte Goldbrasse"
     }
   ]
 };

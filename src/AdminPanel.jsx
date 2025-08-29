@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { onValue, ref, remove, update } from "firebase/database";
 
-// ✅ Menu aggiornato 28/08/2025
+// ✅ Menu aggiornato 30/08/2025
 const menuData = {
   firstCourses: [
-    { it: "Troccoli con sugo di seppia ripiena e cacioricotta" },
-    { it: "Cicatelli con verza, bietola e fonduta di formaggi locali" }
+    { it: "Scialatielli con pesto di rucola e polpo" },
+    { it: "Lagane con cicerchia" }
   ],
   secondCourses: [
-    { it: "Seppia ripiena" },
-    { it: "Scaloppina agli agrumi" }
+    { it: "Roast beef" },
+    { it: "Orata alla griglia" }
   ]
 };
 
@@ -99,7 +99,7 @@ export default function AdminPanel() {
       const trimmedDish = dish.trim();
       if (
         (typeof qty === "number" && qty > 0) ||
-        (trimmedDish === otherKey && qty.trim())
+        (trimmedDish === otherKey && String(qty).trim())
       ) {
         cleanedChoices[trimmedDish] = qty;
       }
